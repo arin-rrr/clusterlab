@@ -2,11 +2,14 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true, // Временно, пока не исправите все типы
   },
   eslint: {
-    // Игнорируем ошибки ESLint при сборке
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: true, // Временно, пока не исправите линтер
+  },
+  // Добавьте эту настройку для совместимости
+  experimental: {
+    typedRoutes: false,
   },
 };
 
