@@ -4,6 +4,9 @@ import { righteous, inter, lusitana } from '@/app/ui/fonts';
 import { Metadata } from 'next';
 //import Header from '@/app/(auth)/components/header'
 import Footer from '@/app/(auth)/components/footer';
+
+export const dynamic = 'force-dynamic';
+
 export default function A_TechLayout({
   children,
 }: {
