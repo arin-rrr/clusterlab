@@ -3,9 +3,17 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import "@/app/ui/profile.css"; // Создадим этот файл рядом
 
+interface UserData {
+  name: string;
+  tier: string;
+  expireDate: string;
+  usedHectares: number;
+  totalHectares: number;
+}
+
 export default function ProfilePage() {
   const router = useRouter();
-  const [userData, setUserData] = useState(null); // Изначально данных нет
+  const [userData, setUserData] = useState<UserData | null>(null); // Изначально данных нет
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

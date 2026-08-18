@@ -11,6 +11,7 @@ from backend.models.users import User
 from backend.models.fields import Field
 from backend.models.analysis_result import AnalysisResult
 from backend.models.field_recommendation import FieldRecommendation
+from backend.models.payments import Payment
 
 # Если есть модель Field, добавь её тоже:
 # from backend.models.fields import Field
