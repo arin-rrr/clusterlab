@@ -3,6 +3,9 @@ import { useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import "@/app/ui/verify.css";
 
+export const dynamic = 'force-dynamic';
+
+
 export default function VerifyPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
