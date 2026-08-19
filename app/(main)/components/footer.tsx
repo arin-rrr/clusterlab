@@ -23,14 +23,10 @@ export default function Footer() {
               <span className="Footer-LogoText">ClusterLab</span>
             </Link>
           </div>
-          <p className="Footer-Subtext">
-            Платформа спутникового мониторинга и кластеризации полей.
-          </p>
         </div>
 
         {/* Колонка 2: Документы */}
         <div className="Footer-Col">
-          <p className="Footer-Title">Документы</p>
           <nav className="Footer-Links">
             <Link href="/privacy">
               <p>Согласие на обработку данных</p>
@@ -45,9 +41,8 @@ export default function Footer() {
         <div className="Footer-Col">
           <p className="Footer-Title">Контакты</p>
           <div className="Footer-Info">
-            <p><a href="tel:+79000000000">+7 (900) 000-00-00</a></p>
-            <p><a href="mailto:support@clusterlab.ru">support@clusterlab.ru</a></p>
-            <p>г. Краснодар, ул. Красная, д. 10</p>
+            <p><a href="mailto:clusterlab@yandex.ru">clusterlab.ru@gmail.com</a></p>
+            <p>198334, СПб, Добровольцев ул., д. 44, Лит. А, пом. 3-Н, офис 11-2</p>
           </div>
         </div>
 
@@ -56,8 +51,7 @@ export default function Footer() {
           <p className="Footer-Title">Реквизиты</p>
           <div className="Footer-Info">
             <p>ООО «КластерЛаб»</p>
-            <p>ИНН: 2310000000</p>
-            <p>ОГРН: 1232300000000</p>
+            <p>ИНН: 7807402857</p>
           </div>
         </div>
 
