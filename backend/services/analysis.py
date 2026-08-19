@@ -7,10 +7,6 @@ from pathlib import Path
 from dotenv import load_dotenv
 from sqlalchemy import select, update
 
-from sentinelhub import (
-    SHConfig, DataCollection, SentinelHubRequest,
-    BBox, CRS, MimeType, bbox_to_dimensions
-)
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans, BisectingKMeans, MiniBatchKMeans
 from sklearn.mixture import GaussianMixture
@@ -59,59 +55,162 @@ function evaluatePixel(sample) {
 }
 """
 
+# УДАЛИ старую функцию download_field_data (она с sentinelhub)
+# и ВСТАВЬ эту:
+
+from pystac_client import Client
+import rasterio
+from rasterio.windows import from_bounds
+from rasterio.warp import transform_bounds
+import numpy as np
+
 
 def download_field_data(lat, lon, radius):
     """
-    Синхронная функция — получает мультиспектральные данные Sentinel-2
-    через Sentinel Hub API и сразу возвращает numpy-массив, без сохранения на диск.
-    Вызывать только через asyncio.to_thread.
+    Загружает мультиспектральные данные Sentinel-2 через Element84 STAC API.
+    Возвращает numpy-массив (height, width, 6) с каналами:
+    B02, B03, B04, B08, B11, B12 (в этом порядке)
     """
-    config = get_sentinel_config()
-
-    # Приводим к float на случай, если из БД пришёл Decimal (столбцы Numeric)
     lat = float(lat)
     lon = float(lon)
     safe_radius = max(float(radius), 100.0)
+    delta = safe_radius / 111000
 
-    delta = safe_radius / 111000  # перевод метров в градусы (приблизительно)
-    bbox = BBox(
-        bbox=[lon - delta, lat - delta, lon + delta, lat + delta],
-        crs=CRS.WGS84
-    )
-    size = bbox_to_dimensions(bbox, resolution=10)
+    bbox = [lon - delta, lat - delta, lon + delta, lat + delta]
 
-    print(f"--- [Sentinel Hub] Запрос снимка: lat={lat}, lon={lon}, radius={safe_radius}m, size={size} ---")
+    print(f"--- [Element84] Запрос снимка: lat={lat}, lon={lon}, radius={safe_radius}m ---")
 
-    request = SentinelHubRequest(
-        evalscript=EVALSCRIPT_BANDS,
-        input_data=[
-            SentinelHubRequest.input_data(
-                data_collection=DataCollection.SENTINEL2_L2A.define_from(
-                    "s2l2a", service_url=config.sh_base_url
-                ),
-                time_interval=('2024-05-01', '2026-04-09'),
-                mosaicking_order='leastCC',
-            )
-        ],
-        responses=[
-            SentinelHubRequest.output_response('default', MimeType.TIFF)
-        ],
+    catalog = Client.open("https://earth-search.aws.element84.com/v1")
+
+    search = catalog.search(
+        collections=["sentinel-2-l2a"],
         bbox=bbox,
-        size=size,
-        config=config,
+        datetime="2024-05-01/2026-04-09",
+        query={"eo:cloud_cover": {"lt": 15}},
+        max_items=10,
     )
 
-    data = request.get_data()
+    items = list(search.items())
+    if not items:
+        raise ValueError("Нет доступных снимков для этой области")
 
-    if not data or data[0] is None:
-        raise ValueError(
-            "Sentinel Hub не вернул данные для этой области "
-            "(нет снимков за период, либо регион вне покрытия)"
-        )
+    # Сортируем по облачности
+    items_sorted = sorted(items, key=lambda x: x.properties.get('eo:cloud_cover', 100))
 
-    array = data[0]  # numpy массив формы (height, width, 6)
-    print(f"--- [Sentinel Hub] Данные получены: shape={array.shape} ---")
-    return array
+    # ВАЖНО: порядок каналов должен совпадать с EVALSCRIPT_BANDS:
+    # B02, B03, B04, B08, B11, B12
+    # В Element84 они называются: blue, green, red, nir, swir16, swir22
+    band_mapping = {
+        "B02": "blue",
+        "B03": "green",
+        "B04": "red",
+        "B08": "nir",
+        "B11": "swir16",
+        "B12": "swir22"
+    }
+    band_names = ["B02", "B03", "B04", "B08", "B11", "B12"]
+    element84_bands = [band_mapping[b] for b in band_names]
+
+    for item in items_sorted:
+        print(f"Пробуем снимок {item.datetime.date()}, облачность: {item.properties.get('eo:cloud_cover', 100):.2f}%")
+
+        try:
+            arrays = []
+
+            for band in element84_bands:
+                href = item.assets[band].href
+
+                with rasterio.open(href) as src:
+                    # Конвертируем координаты
+                    bounds_utm = transform_bounds("EPSG:4326", src.crs, *bbox)
+
+                    # Проверяем пересечение
+                    img_bounds = src.bounds
+                    if (bounds_utm[2] < img_bounds[0] or bounds_utm[0] > img_bounds[2] or
+                            bounds_utm[3] < img_bounds[1] or bounds_utm[1] > img_bounds[3]):
+                        print(f"  ❌ bbox не пересекается с изображением")
+                        raise ValueError("Нет пересечения")
+
+                    # Вырезаем окно
+                    window = from_bounds(*bounds_utm, transform=src.transform)
+
+                    if window.width == 0 or window.height == 0:
+                        print(f"  ❌ Пустое окно")
+                        raise ValueError("Пустое окно")
+
+                    # Читаем данные и нормализуем (для Sentinel-2 L2A)
+                    data = src.read(1, window=window).astype('float32') * 0.0001
+                    arrays.append(data)
+
+            # Проверяем, что все каналы одинакового размера
+            shapes = [arr.shape for arr in arrays]
+            if len(set(shapes)) != 1:
+                print(f"  ⚠️ Каналы разного размера: {shapes}, пропускаем")
+                continue
+
+            # Объединяем в массив (height, width, 6)
+            result = np.stack(arrays, axis=-1)
+
+            print(f"--- [Element84] Данные получены: shape={result.shape} ---")
+            return result
+
+        except Exception as e:
+            print(f"  ❌ Ошибка: {e}")
+            continue
+
+    raise ValueError("Не удалось загрузить ни один снимок для этой области")
+# def download_field_data(lat, lon, radius):
+#     """
+#     Синхронная функция — получает мультиспектральные данные Sentinel-2
+#     через Sentinel Hub API и сразу возвращает numpy-массив, без сохранения на диск.
+#     Вызывать только через asyncio.to_thread.
+#     """
+#     config = get_sentinel_config()
+#
+#     # Приводим к float на случай, если из БД пришёл Decimal (столбцы Numeric)
+#     lat = float(lat)
+#     lon = float(lon)
+#     safe_radius = max(float(radius), 100.0)
+#
+#     delta = safe_radius / 111000  # перевод метров в градусы (приблизительно)
+#     bbox = BBox(
+#         bbox=[lon - delta, lat - delta, lon + delta, lat + delta],
+#         crs=CRS.WGS84
+#     )
+#     size = bbox_to_dimensions(bbox, resolution=10)
+#
+#     print(f"--- [Sentinel Hub] Запрос снимка: lat={lat}, lon={lon}, radius={safe_radius}m, size={size} ---")
+#
+#     request = SentinelHubRequest(
+#         evalscript=EVALSCRIPT_BANDS,
+#         input_data=[
+#             SentinelHubRequest.input_data(
+#                 data_collection=DataCollection.SENTINEL2_L2A.define_from(
+#                     "s2l2a", service_url=config.sh_base_url
+#                 ),
+#                 time_interval=('2024-05-01', '2026-04-09'),
+#                 mosaicking_order='leastCC',
+#             )
+#         ],
+#         responses=[
+#             SentinelHubRequest.output_response('default', MimeType.TIFF)
+#         ],
+#         bbox=bbox,
+#         size=size,
+#         config=config,
+#     )
+#
+#     data = request.get_data()
+#
+#     if not data or data[0] is None:
+#         raise ValueError(
+#             "Sentinel Hub не вернул данные для этой области "
+#             "(нет снимков за период, либо регион вне покрытия)"
+#         )
+#
+#     array = data[0]  # numpy массив формы (height, width, 6)
+#     print(f"--- [Sentinel Hub] Данные получены: shape={array.shape} ---")
+#     return array
 
 
 def best_cluster_algo(data_scaled: np.ndarray):
@@ -485,3 +584,80 @@ def build_prescription_shapefile(polygons_by_cluster: dict, zones: list[dict]) -
         zf.writestr("prescription.prj", prj_wkt)
 
     return zip_buffer.getvalue()
+
+
+from pystac_client import Client
+import rasterio
+from rasterio.windows import from_bounds
+from rasterio.warp import transform_bounds
+import numpy as np
+import stackstac
+
+
+def download_field_data_aws(lat, lon, radius):
+    lat = float(lat)
+    lon = float(lon)
+    safe_radius = max(float(radius), 100.0)
+    delta = safe_radius / 111000
+
+    bbox = [lon - delta, lat - delta, lon + delta, lat + delta]
+
+    catalog = Client.open("https://earth-search.aws.element84.com/v1")
+
+    search = catalog.search(
+        collections=["sentinel-2-l2a"],
+        bbox=bbox,
+        datetime="2024-05-01/2026-04-09",
+        query={"eo:cloud_cover": {"lt": 15}},
+        max_items=10,
+    )
+
+    items = list(search.items())
+    if not items:
+        raise ValueError("Нет доступных снимков")
+
+    # Сортируем по облачности
+    items_sorted = sorted(items, key=lambda x: x.properties.get('eo:cloud_cover', 100))
+
+    # Только 10-метровые каналы (чтобы не было проблем с разным разрешением)
+    bands = ["blue", "green", "red", "nir"]
+
+    for item in items_sorted:
+        print(f"Пробуем снимок {item.datetime.date()}, облачность: {item.properties.get('eo:cloud_cover', 100):.2f}%")
+
+        try:
+            arrays = []
+
+            for band in bands:
+                href = item.assets[band].href
+
+                with rasterio.open(href) as src:
+                    # Конвертируем координаты
+                    bounds_utm = transform_bounds("EPSG:4326", src.crs, *bbox)
+
+                    # Вырезаем окно
+                    window = from_bounds(*bounds_utm, transform=src.transform)
+
+                    # Читаем данные и сразу нормализуем (для Sentinel-2 L2A)
+                    data = src.read(1, window=window).astype('float32') * 0.0001
+
+                    arrays.append(data)
+
+            # Проверяем, что все каналы одинакового размера
+            shapes = [arr.shape for arr in arrays]
+            if len(set(shapes)) != 1:
+                print(f"  ⚠️ Каналы разного размера: {shapes}, пропускаем")
+                continue
+
+            # Объединяем в один массив
+            result = np.stack(arrays, axis=-1)
+
+            print(f"✅ Успех! Форма: {result.shape}")
+            return result
+
+        except Exception as e:
+            print(f"  ❌ Ошибка: {e}")
+            continue
+
+    raise ValueError("Не удалось загрузить ни один снимок")
+
