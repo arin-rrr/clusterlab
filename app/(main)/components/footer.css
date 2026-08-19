@@ -2,19 +2,18 @@
 
 .Footer-footer {
   width: 100%;
-  background-color: #3c3126;
-  padding: 40px 8% 20px 8%;
+  background: linear-gradient(135deg, #2a1f16 0%, #3c3126 100%);
+  padding: 50px 8% 20px 8%;
   font-family: "Jura", sans-serif;
   color: #e8dcc4;
   box-sizing: border-box;
+  border-top: 1px solid rgba(232, 220, 196, 0.08);
 }
 
-/* Перенастроили пропорции колонок под обновленный контент */
 .Footer-Content {
   display: grid;
-  grid-template-columns: 0.8fr 1.2fr 1.3fr 0.9fr;
-  gap: 30px;
-  align-items: start;
+  grid-template-columns: 1.5fr 1fr 1.5fr 1.2fr;
+  gap: 40px;
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -22,92 +21,149 @@
 .Footer-Col {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-}
-
-/* Выравниваем колонку с документами по высоте с заголовками других колонок */
-.Footer-Col:nth-child(2) {
-  padding-top: 4px;
+  gap: 16px;
 }
 
 /* Логотип */
 .Footer-Logo {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+
+.Footer-LogoImg {
+  filter: brightness(0) invert(1);
+  width: 56px;
+  height: 56px;
 }
 
 .Footer-LogoText {
   font-family: "Righteous", sans-serif;
-  font-size: 26px;
+  font-size: 28px;
   color: #e8dcc4;
   line-height: 1;
-  transition: opacity 0.2s ease;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
 }
 
 .Footer-LogoText:hover {
-  opacity: 0.85;
+  color: #ff7043;
+  text-shadow: 0 0 20px rgba(255, 112, 67, 0.3);
+}
+
+.Footer-Description {
+  font-size: 13px;
+  line-height: 1.6;
+  opacity: 0.6;
+  margin: 0;
+  max-width: 200px;
 }
 
 /* Заголовки колонок */
 .Footer-Title {
   font-weight: 700;
-  font-size: 15px;
+  font-size: 14px;
   color: #e8dcc4;
-  margin: 0;
+  margin: 0 0 4px 0;
   text-transform: uppercase;
-  letter-spacing: 0.8px;
-  opacity: 0.9;
+  letter-spacing: 1.2px;
+  opacity: 0.8;
+  position: relative;
+  padding-bottom: 10px;
 }
 
-/* Ссылки и текстовые блоки */
-.Footer-Links,
-.Footer-Info {
+.Footer-Title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 30px;
+  height: 2px;
+  background: #ff7043;
+  border-radius: 2px;
+}
+
+/* Ссылки */
+.Footer-Links {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  font-size: 14px;
+  gap: 10px;
 }
 
-.Footer-Links p {
-  margin: 0;
-  color: #e8dcc4;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  line-height: 1.4;
-}
-
-.Footer-Links p:hover {
-  color: #ff7043;
-  text-shadow: 0px 0px 8px rgba(255, 112, 67, 0.4);
-}
-
-.Footer-Info p {
-  margin: 0;
-  line-height: 1.4;
-  opacity: 0.85;
-  word-break: break-word; /* Чтобы длинные почты и адреса не вылезали за пределы */
-}
-
-.Footer-Info a {
+.Footer-Links a {
   color: #e8dcc4;
   text-decoration: none;
-  transition: color 0.2s ease;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+  padding: 2px 0;
 }
 
-.Footer-Info a:hover {
+.Footer-Links a:hover {
   color: #ff7043;
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* Контакты и реквизиты */
+.Footer-Contacts,
+.Footer-Requisites {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.Footer-ContactItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #e8dcc4;
+  opacity: 0.75;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  padding: 2px 0;
+}
+
+.Footer-ContactItem svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  opacity: 0.6;
+  color: #ff7043;
+}
+
+.Footer-ContactItem:hover {
+  opacity: 1;
+  color: #ff7043;
+}
+
+.Footer-ContactItem:hover svg {
+  opacity: 1;
+}
+
+.Footer-ContactItem a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.Footer-RequisiteLabel {
+  opacity: 0.5;
+  font-weight: 300;
+  margin-right: 4px;
 }
 
 /* Нижняя плашка */
 .Footer-Bottom {
   max-width: 1200px;
-  margin: 35px auto 0 auto;
-  padding-top: 18px;
-  border-top: 1px solid rgba(232, 220, 196, 0.15);
+  margin: 40px auto 0 auto;
+  padding-top: 20px;
+  border-top: 1px solid rgba(232, 220, 196, 0.08);
   text-align: center;
   font-size: 13px;
-  opacity: 0.6;
+  opacity: 0.4;
+  letter-spacing: 0.3px;
 }
 
 .Footer-Bottom p {
@@ -115,20 +171,47 @@
 }
 
 /* Адаптив */
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .Footer-Content {
     grid-template-columns: 1fr 1fr;
-    gap: 28px;
-  }
-
-  .Footer-Col:nth-child(2) {
-    padding-top: 0;
+    gap: 32px;
   }
 }
 
-@media (max-width: 550px) {
+@media (max-width: 768px) {
+  .Footer-footer {
+    padding: 40px 6% 20px 6%;
+  }
+
   .Footer-Content {
     grid-template-columns: 1fr;
-    gap: 20px;
+    gap: 28px;
+  }
+
+  .Footer-Description {
+    max-width: 100%;
+  }
+
+  .Footer-Title::after {
+    width: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Footer-LogoText {
+    font-size: 22px;
+  }
+
+  .Footer-LogoImg {
+    width: 44px;
+    height: 44px;
+  }
+
+  .Footer-ContactItem {
+    font-size: 13px;
+  }
+
+  .Footer-Title {
+    font-size: 13px;
   }
 }
