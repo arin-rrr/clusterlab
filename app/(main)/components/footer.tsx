@@ -14,8 +14,8 @@ export default function Footer() {
               className="Footer-LogoImg"
               src="/footer/Logo-Transparent.svg"
               alt="ClusterLab Logo"
-              width={64}
-              height={64}
+              width={60}
+              height={60}
               priority
             />
             <Link href="/">
