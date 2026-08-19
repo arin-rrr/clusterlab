@@ -127,20 +127,9 @@
   padding: 2px 0;
 }
 
-.Footer-ContactItem svg {
-  flex-shrink: 0;
-  margin-top: 2px;
-  opacity: 0.6;
-  color: #ff7043;
-}
-
 .Footer-ContactItem:hover {
   opacity: 1;
   color: #ff7043;
-}
-
-.Footer-ContactItem:hover svg {
-  opacity: 1;
 }
 
 .Footer-ContactItem a {
@@ -148,10 +137,15 @@
   text-decoration: none;
 }
 
-.Footer-RequisiteLabel {
-  opacity: 0.5;
-  font-weight: 300;
-  margin-right: 4px;
+.Footer-Icon {
+  flex-shrink: 0;
+  font-size: 16px;
+  opacity: 0.6;
+  margin-top: 1px;
+}
+
+.Footer-ContactItem:hover .Footer-Icon {
+  opacity: 1;
 }
 
 /* Нижняя плашка */
