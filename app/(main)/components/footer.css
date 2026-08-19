@@ -9,11 +9,11 @@
   box-sizing: border-box;
 }
 
-/* Сетка из 4 равных колонок */
+/* Перенастроили пропорции колонок под обновленный контент */
 .Footer-Content {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 1fr 1fr;
-  gap: 40px;
+  grid-template-columns: 0.8fr 1.2fr 1.3fr 0.9fr;
+  gap: 30px;
   align-items: start;
   max-width: 1200px;
   margin: 0 auto;
@@ -25,6 +25,11 @@
   gap: 12px;
 }
 
+/* Выравниваем колонку с документами по высоте с заголовками других колонок */
+.Footer-Col:nth-child(2) {
+  padding-top: 4px;
+}
+
 /* Логотип */
 .Footer-Logo {
   display: flex;
@@ -34,31 +39,28 @@
 
 .Footer-LogoText {
   font-family: "Righteous", sans-serif;
-  font-size: 28px;
+  font-size: 26px;
   color: #e8dcc4;
   line-height: 1;
+  transition: opacity 0.2s ease;
 }
 
-.Footer-Subtext {
-  font-size: 13px;
-  opacity: 0.7;
-  line-height: 1.4;
-  margin: 0;
-  max-width: 220px;
+.Footer-LogoText:hover {
+  opacity: 0.85;
 }
 
 /* Заголовки колонок */
 .Footer-Title {
   font-weight: 700;
-  font-size: 16px;
+  font-size: 15px;
   color: #e8dcc4;
-  margin: 0 0 4px 0;
+  margin: 0;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.8px;
   opacity: 0.9;
 }
 
-/* Навигация и списки */
+/* Ссылки и текстовые блоки */
 .Footer-Links,
 .Footer-Info {
   display: flex;
@@ -71,17 +73,20 @@
   margin: 0;
   color: #e8dcc4;
   cursor: pointer;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  line-height: 1.4;
 }
 
 .Footer-Links p:hover {
   color: #ff7043;
+  text-shadow: 0px 0px 8px rgba(255, 112, 67, 0.4);
 }
 
 .Footer-Info p {
   margin: 0;
   line-height: 1.4;
-  opacity: 0.8;
+  opacity: 0.85;
+  word-break: break-word; /* Чтобы длинные почты и адреса не вылезали за пределы */
 }
 
 .Footer-Info a {
@@ -94,11 +99,11 @@
   color: #ff7043;
 }
 
-/* Нижняя полоса с копирайтом */
+/* Нижняя плашка */
 .Footer-Bottom {
   max-width: 1200px;
-  margin: 30px auto 0 auto;
-  padding-top: 20px;
+  margin: 35px auto 0 auto;
+  padding-top: 18px;
   border-top: 1px solid rgba(232, 220, 196, 0.15);
   text-align: center;
   font-size: 13px;
@@ -109,17 +114,21 @@
   margin: 0;
 }
 
-/* Адаптив для маленьких экранов */
+/* Адаптив */
 @media (max-width: 900px) {
   .Footer-Content {
     grid-template-columns: 1fr 1fr;
-    gap: 30px;
+    gap: 28px;
+  }
+
+  .Footer-Col:nth-child(2) {
+    padding-top: 0;
   }
 }
 
 @media (max-width: 550px) {
   .Footer-Content {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
   }
 }

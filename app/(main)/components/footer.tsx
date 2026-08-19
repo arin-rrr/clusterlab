@@ -42,7 +42,7 @@ export default function Footer() {
           <p className="Footer-Title">Контакты</p>
           <div className="Footer-Info">
             <p><a href="mailto:clusterlab@yandex.ru">clusterlab.ru@gmail.com</a></p>
-            <p>198334, СПб, Добровольцев ул., д. 44, Лит. А, пом. 3-Н, офис 11-2</p>
+            <p>198334, Санкт-Петербург, Добровольцев ул., д. 44, Лит. А, пом. 3-Н, офис 11-2</p>
           </div>
         </div>
 
