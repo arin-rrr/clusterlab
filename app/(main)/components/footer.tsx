@@ -22,11 +22,6 @@ export default function Footer() {
               <span className="Footer-LogoText">ClusterLab</span>
             </Link>
           </div>
-          <p className="Footer-Description">
-            Платформа для точного земледелия
-            <br />
-            на основе спутниковых данных
-          </p>
         </div>
 
         {/* Колонка 2: Документы */}
