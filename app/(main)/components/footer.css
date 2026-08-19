@@ -2,15 +2,26 @@
 
 .Footer-footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 5%;
+  flex-direction: column;
+  padding: 40px 5% 20px 5%;
   background-color: #3c3126;
   box-shadow: none;
   position: relative;
   z-index: 1;
+  font-family: "Jura", sans-serif;
+  color: #e8dcc4;
 }
 
+.Footer-Content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 40px;
+  width: 100%;
+}
+
+/* Логотип */
 .Footer-Logo {
   display: flex;
   align-items: center;
@@ -25,23 +36,11 @@
   margin: 0;
 }
 
-.Footer-Mail {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.Footer-MailText {
-  font-family: "Jura", sans-serif;
-  font-size: 20px;
-  color: #e8dcc4;
-  line-height: 1;
-}
-
+/* Ссылки на документы */
 .Footer-Pages {
   display: flex;
-  align-items: center;
-  gap: 60px;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .Footer-Pages p {
@@ -49,10 +48,11 @@
   text-decoration: none;
   color: #e8dcc4;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
   text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
   transition: all 0.3s ease;
   margin: 0;
+  cursor: pointer;
 }
 
 .Footer-Pages p:hover {
@@ -60,37 +60,52 @@
   text-shadow: 0px 0px 12px rgba(255, 112, 67, 0.5);
 }
 
-.Footer-PersonalData {
-  font-family: "Jura", sans-serif;
-  font-size: 20px;
-  color: #e8dcc4;
-  line-height: 1;
+/* Блоки контактов и реквизитов */
+.Footer-Contacts,
+.Footer-Requisites {
   display: flex;
-  align-items: center;
-}
-
-.Footer-Content {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 20px;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 15px;
 }
 
 .Footer-Title {
-  font-weight: bold;
-  margin-bottom: 8px;
+  font-family: "Jura", sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: #e8dcc4;
+  margin-bottom: 4px;
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.Footer-Contacts p,
+.Footer-Requisites p {
+  margin: 0;
+  line-height: 1.4;
+  opacity: 0.9;
 }
 
 .Footer-Contacts a {
-  color: inherit;
+  color: #e8dcc4;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
+.Footer-Contacts a:hover {
+  color: #ff7043;
+}
+
+/* Нижняя полоса с копирайтом */
 .Footer-Bottom {
+  width: 100%;
   margin-top: 30px;
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 15px;
-  font-size: 0.85rem;
+  border-top: 1px solid rgba(232, 220, 196, 0.2);
+  padding-top: 20px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.Footer-Bottom p {
+  margin: 0;
 }
