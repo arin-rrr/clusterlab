@@ -22,6 +22,10 @@ export default function Footer() {
               <span className="Footer-LogoText">ClusterLab</span>
             </Link>
           </div>
+          <p className="Footer-Description">
+            Точное земледелие на основе спутниковых данных и ИИ — оптимизация
+            внесения удобрений для вашего хозяйства.
+          </p>
         </div>
 
         {/* Колонка 2: Документы */}
@@ -63,6 +67,10 @@ export default function Footer() {
             <div className="Footer-ContactItem">
               <span className="Footer-Icon">📋</span>
               <span>ИНН: 7807402857</span>
+            </div>
+            <div className="Footer-ContactItem">
+              <span className="Footer-Icon">📄</span>
+              <span>ОГРН: 000000000000</span>
             </div>
           </div>
         </div>
