@@ -1,32 +1,23 @@
-/* ============================================
-   Footer — чистый CSS, mobile-first
-   ============================================ */
-
 .Footer-root {
   width: 100%;
   background: linear-gradient(135deg, #2a1f16 0%, #3c3126 100%);
-  padding: 40px 5% 20px 5%;
+  padding: 32px 8% 20px 8%;
   font-family: "Jura", sans-serif;
   color: #e6e1c5;
   box-sizing: border-box;
   border-top: 1px solid rgba(230, 225, 197, 0.06);
 }
 
-/* ===== Строки ===== */
-.Footer-row {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* --- Строка 1: Лого + почта + документы --- */
-.Footer-row--top {
+/* ===== Строка 1 ===== */
+.Footer-topRow {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 16px;
-  padding-bottom: 28px;
-  border-bottom: 1px solid rgba(230, 225, 197, 0.08);
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(230, 225, 197, 0.06);
 }
 
 .Footer-brand {
@@ -52,7 +43,7 @@
 
 .Footer-logoText {
   font-family: "Righteous", sans-serif;
-  font-size: 22px;
+  font-size: 28px;
   color: #e6e1c5;
   line-height: 1;
   letter-spacing: 0.5px;
@@ -64,8 +55,15 @@
   text-shadow: 0 0 24px rgba(255, 112, 67, 0.25);
 }
 
+.Footer-separator {
+  display: none;
+  opacity: 0.2;
+  font-size: 16px;
+  user-select: none;
+}
+
 .Footer-topLink {
-  font-size: 14px;
+  font-size: 15px;
   color: #e6e1c5;
   opacity: 0.6;
   text-decoration: none;
@@ -98,23 +96,24 @@
   opacity: 0.85;
 }
 
-/* --- Строка 2: 2 колонки --- */
-.Footer-row--middle {
+/* ===== Строка 2 ===== */
+.Footer-middleRow {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 28px;
-  margin-top: 28px;
+  gap: 24px;
+  max-width: 1200px;
+  margin: 20px auto 0 auto;
 }
 
 .Footer-col {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .Footer-heading {
   font-weight: 700;
-  font-size: 12px;
+  font-size: 14px;
   color: #e6e1c5;
   margin: 0;
   text-transform: uppercase;
@@ -143,15 +142,15 @@
 .Footer-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .Footer-item {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.4;
   color: #e6e1c5;
   opacity: 0.65;
   transition: all 0.3s ease;
@@ -164,9 +163,9 @@
 
 .Footer-icon {
   flex-shrink: 0;
-  font-size: 14px;
+  font-size: 16px;
   opacity: 0.5;
-  margin-top: 2px;
+  margin-top: 1px;
   transition: all 0.3s ease;
 }
 
@@ -175,58 +174,51 @@
   transform: scale(1.1);
 }
 
-/* --- Строка 3: Нижняя плашка --- */
-.Footer-row--bottom {
-  margin-top: 32px;
-  padding-top: 18px;
+/* ===== Строка 3 ===== */
+.Footer-bottomRow {
+  max-width: 1200px;
+  margin: 20px auto 0 auto;
+  padding-top: 16px;
   border-top: 1px solid rgba(230, 225, 197, 0.06);
   text-align: center;
 }
 
 .Footer-copyright {
   margin: 0;
-  font-size: 13px;
+  font-size: 14px;
   color: #e6e1c5;
   opacity: 0.35;
   letter-spacing: 0.5px;
+  text-align: justify
 }
 
-/* ============================================
-   Адаптив: tablet (768px+)
-   ============================================ */
+/* ===== Tablet: 768px+ ===== */
 @media (min-width: 768px) {
-  .Footer-root {
-    padding: 48px 6% 24px 6%;
-  }
-
-  .Footer-row--top {
+  .Footer-topRow {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
-    gap: 20px 28px;
-  }
-
-  .Footer-brand {
-    margin-right: auto;
+    justify-content: center;
+    gap: 16px 20px;
   }
 
   .Footer-logoImg {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
   }
 
   .Footer-logoText {
-    font-size: 24px;
+    font-size: 32px;
   }
 
-  .Footer-row--middle {
+  .Footer-middleRow {
     grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    margin-top: 36px;
+    gap: 28px;
+    margin-top: 24px;
   }
 
   .Footer-heading {
-    font-size: 13px;
+    font-size: 15px;
     padding-bottom: 12px;
   }
 
@@ -238,44 +230,45 @@
     width: 44px;
   }
 
-  .Footer-row--bottom {
-    margin-top: 40px;
+  .Footer-item {
+    font-size: 17px;
+  }
+
+  .Footer-bottomRow {
+    margin-top: 24px;
   }
 }
 
-/* ============================================
-   Адаптив: desktop (1024px+)
-   ============================================ */
+/* ===== Desktop: 1024px+ ===== */
 @media (min-width: 1024px) {
-  .Footer-root {
-    padding: 60px 8% 24px 8%;
-  }
-
-  .Footer-row--top {
-    gap: 32px;
-    padding-bottom: 32px;
-  }
-
   .Footer-logoImg {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
   }
 
   .Footer-logoText {
-    font-size: 26px;
+    font-size: 34px;
   }
 
-  .Footer-row--middle {
-    gap: 56px;
-    margin-top: 40px;
+  .Footer-topLink {
+    font-size: 16px;
   }
 
-  .Footer-item {
-    gap: 12px;
-    font-size: 15px;
+  .Footer-topRow {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 0;
   }
 
-  .Footer-icon {
-    font-size: 15px;
+  .Footer-separator {
+    display: inline;
+  }
+
+  .Footer-middleRow {
+    margin-top: 28px;
+  }
+
+  .Footer-bottomRow {
+    margin-top: 28px;
   }
 }

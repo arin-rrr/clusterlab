@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,21 +8,15 @@ import "./footer.css";
 export default function Footer() {
   return (
     <footer className="Footer-root">
-      {/* === Строка 1: Лого, почта, документы === */}
-      <div className="Footer-row Footer-row--top">
+      {/* Строка 1 */}
+      <div className="Footer-topRow">
         <div className="Footer-brand">
-          <Image
-            className="Footer-logoImg"
-            src="/footer/Logo-Transparent.svg"
-            alt="ClusterLab Logo"
-            width={44}
-            height={44}
-            priority
-          />
           <Link href="/" className="Footer-logoLink">
             <span className="Footer-logoText">ClusterLab</span>
           </Link>
         </div>
+
+        <span className="Footer-separator">|</span>
 
         <a
           href="mailto:clusterlab.ru@gmail.com"
@@ -29,17 +25,21 @@ export default function Footer() {
           clusterlab.ru@gmail.com
         </a>
 
+        <span className="Footer-separator">|</span>
+
         <Link href="/privacy" className="Footer-topLink">
           Согласие на обработку данных
         </Link>
+
+        <span className="Footer-separator">|</span>
 
         <Link href="/offer" className="Footer-topLink">
           Договор оферты
         </Link>
       </div>
 
-      {/* === Строка 2: Юр. адрес | Реквизиты === */}
-      <div className="Footer-row Footer-row--middle">
+      {/* Строка 2 */}
+      <div className="Footer-middleRow">
         <div className="Footer-col">
           <h4 className="Footer-heading">Юридический адрес</h4>
           <div className="Footer-list">
@@ -69,8 +69,8 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* === Строка 3: Нижняя плашка === */}
-      <div className="Footer-row Footer-row--bottom">
+      {/* Строка 3 */}
+      <div className="Footer-bottomRow">
         <p className="Footer-copyright">
           © {new Date().getFullYear()} ClusterLab. Все права защищены.
         </p>
