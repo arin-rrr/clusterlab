@@ -134,7 +134,7 @@ export default function HomePage() {
               </a>
             </div>
             <div>
-              <a>Вы получаете интерактивную карту с рекомендациями по каждой зоне и <u><a href='https://en.wikipedia.org/wiki/Shapefile' target="_blank">shapefile</a></u> для интеграции с техникой точного земледелия.</a>
+              <a>Вы получаете интерактивную карту с рекомендациями по каждой зоне и <u>shapefile</u> для интеграции с техникой точного земледелия.</a>
             </div>
           </div>
           <div className="App-Page-Block-3-SubImage">
