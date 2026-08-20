@@ -45,11 +45,11 @@ export default function Footer() {
           <div className="Footer-list">
             <div className="Footer-item">
               <span className="Footer-icon">🏢</span>
-              <span>ООО «КластерЛаб»</span>
+              <span>ООО «Кластерлаб»</span>
             </div>
             <div className="Footer-item">
               <span className="Footer-icon">📍</span>
-              <span>Санкт-Петербург, ул. Добровольцев, д. 44</span>
+              <span>198334, город Санкт-Петербург, ул. Добровольцев, д. 44 литера А, помещ. 3-н офис 11-2 </span>
             </div>
           </div>
         </div>
@@ -63,7 +63,7 @@ export default function Footer() {
             </div>
             <div className="Footer-item">
               <span className="Footer-icon">📋</span>
-              <span>ОГРН: 1187847123456</span>
+              <span>ОГРН: 1257800099006</span>
             </div>
           </div>
         </div>
