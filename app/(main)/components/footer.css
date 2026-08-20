@@ -246,11 +246,3 @@
     font-size: 12px;
   }
 }
-
-.Footer-Content {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1.3fr 1.3fr;
-  gap: 48px;
-  max-width: 1200px;
-  margin: 0 auto;
-}

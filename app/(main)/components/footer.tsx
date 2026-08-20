@@ -64,10 +64,6 @@ export default function Footer() {
               <span className="Footer-Icon">📋</span>
               <span>ИНН: 7807402857</span>
             </div>
-            <div className="Footer-ContactItem">
-              <span className="Footer-Icon">📄</span>
-              <span>ОГРН: 000000000000</span>
-            </div>
           </div>
         </div>
       </div>
