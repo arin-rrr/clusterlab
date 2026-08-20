@@ -1,77 +1,79 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import "@/app/(auth)/components/footer.css";
+import "./footer.css";
 
 export default function Footer() {
   return (
-    <footer className="Footer-footer">
-      {/* === Строка 1: Лого + название, почта, документы === */}
-      <div className="Footer-TopRow">
-        <div className="Footer-LogoWrap">
+    <footer className="Footer-root">
+      {/* === Строка 1: Лого, почта, документы === */}
+      <div className="Footer-row Footer-row--top">
+        <div className="Footer-brand">
           <Image
-            className="Footer-LogoImg"
+            className="Footer-logoImg"
             src="/footer/Logo-Transparent.svg"
             alt="ClusterLab Logo"
-            width={60}
-            height={60}
+            width={44}
+            height={44}
             priority
           />
-          <Link href="/">
-            <span className="Footer-LogoText">ClusterLab</span>
+          <Link href="/" className="Footer-logoLink">
+            <span className="Footer-logoText">ClusterLab</span>
           </Link>
         </div>
 
         <a
           href="mailto:clusterlab.ru@gmail.com"
-          className="Footer-TopLink Footer-TopLink--email"
+          className="Footer-topLink Footer-topLink--email"
         >
           clusterlab.ru@gmail.com
         </a>
 
-        <Link href="/privacy" className="Footer-TopLink">
+        <Link href="/privacy" className="Footer-topLink">
           Согласие на обработку данных
         </Link>
 
-        <Link href="/offer" className="Footer-TopLink">
+        <Link href="/offer" className="Footer-topLink">
           Договор оферты
         </Link>
       </div>
 
       {/* === Строка 2: Юр. адрес | Реквизиты === */}
-      <div className="Footer-BottomRow">
-        <div className="Footer-BottomCol">
-          <h4 className="Footer-Title">Юридический адрес</h4>
-          <div className="Footer-Requisites">
-            <div className="Footer-ContactItem">
-              <span className="Footer-Icon">🏢</span>
+      <div className="Footer-row Footer-row--middle">
+        <div className="Footer-col">
+          <h4 className="Footer-heading">Юридический адрес</h4>
+          <div className="Footer-list">
+            <div className="Footer-item">
+              <span className="Footer-icon">🏢</span>
               <span>ООО «КластерЛаб»</span>
             </div>
-            <div className="Footer-ContactItem">
-              <span className="Footer-Icon">📍</span>
+            <div className="Footer-item">
+              <span className="Footer-icon">📍</span>
               <span>Санкт-Петербург, ул. Добровольцев, д. 44</span>
             </div>
           </div>
         </div>
 
-        <div className="Footer-BottomCol">
-          <h4 className="Footer-Title">Реквизиты</h4>
-          <div className="Footer-Requisites">
-            <div className="Footer-ContactItem">
-              <span className="Footer-Icon">📋</span>
+        <div className="Footer-col">
+          <h4 className="Footer-heading">Реквизиты</h4>
+          <div className="Footer-list">
+            <div className="Footer-item">
+              <span className="Footer-icon">📋</span>
               <span>ИНН: 7807402857</span>
             </div>
-            <div className="Footer-ContactItem">
-              <span className="Footer-Icon">📋</span>
+            <div className="Footer-item">
+              <span className="Footer-icon">📋</span>
               <span>ОГРН: 1187847123456</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* === Нижняя плашка === */}
-      <div className="Footer-Bottom">
-        <p>© {new Date().getFullYear()} ClusterLab. Все права защищены.</p>
+      {/* === Строка 3: Нижняя плашка === */}
+      <div className="Footer-row Footer-row--bottom">
+        <p className="Footer-copyright">
+          © {new Date().getFullYear()} ClusterLab. Все права защищены.
+        </p>
       </div>
     </footer>
   );
