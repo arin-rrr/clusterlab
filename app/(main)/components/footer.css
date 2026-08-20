@@ -1,6 +1,6 @@
-@import "tailwindcss";
+/* НЕ импортируем tailwindcss здесь — это должен делать глобальный CSS */
 
-.Footer-footer {
+.Footer-footer.Footer-footer {
   width: 100%;
   background: linear-gradient(135deg, #2a1f16 0%, #3c3126 100%);
   padding: 60px 8% 24px 8%;
@@ -10,44 +10,44 @@
   border-top: 1px solid rgba(230, 225, 197, 0.06);
 }
 
-.Footer-Content {
-  display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr;
+.Footer-Content.Footer-Content {
+  display: grid !important;
+  grid-template-columns: 1.4fr 1fr 1fr !important;
   gap: 56px;
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.Footer-Col {
+.Footer-Col.Footer-Col {
   display: flex;
   flex-direction: column;
   gap: 18px;
 }
 
 /* ===== Колонка 1: Бренд ===== */
-.Footer-Col-Brand {
+.Footer-Col-Brand.Footer-Col-Brand {
   gap: 14px;
 }
 
-.Footer-Logo {
+.Footer-Logo.Footer-Logo {
   display: flex;
   align-items: center;
   gap: 14px;
   margin-bottom: 4px;
 }
 
-.Footer-LogoImg {
+.Footer-LogoImg.Footer-LogoImg {
   filter: brightness(0) invert(1);
   width: 52px;
   height: 52px;
   transition: transform 0.3s ease;
 }
 
-.Footer-LogoImg:hover {
+.Footer-LogoImg.Footer-LogoImg:hover {
   transform: scale(1.05);
 }
 
-.Footer-LogoText {
+.Footer-LogoText.Footer-LogoText {
   font-family: "Righteous", sans-serif;
   font-size: 28px;
   color: #e6e1c5;
@@ -57,12 +57,12 @@
   text-decoration: none;
 }
 
-.Footer-LogoText:hover {
+.Footer-LogoText.Footer-LogoText:hover {
   color: #ff7043;
   text-shadow: 0 0 24px rgba(255, 112, 67, 0.25);
 }
 
-.Footer-BrandEmail {
+.Footer-BrandEmail.Footer-BrandEmail {
   font-size: 14px;
   color: #e6e1c5;
   opacity: 0.65;
@@ -71,19 +71,20 @@
   width: fit-content;
 }
 
-.Footer-BrandEmail:hover {
+.Footer-BrandEmail.Footer-BrandEmail:hover {
   color: #ff7043;
   opacity: 1;
 }
 
-.Footer-BrandLinks {
+.Footer-BrandLinks.Footer-BrandLinks {
   display: flex;
   flex-direction: column;
   gap: 8px;
   margin-top: 4px;
 }
 
-.Footer-BrandLinks a {
+.Footer-BrandLink.Footer-BrandLink {
+  display: block;
   color: #e6e1c5;
   text-decoration: none;
   font-size: 13px;
@@ -93,26 +94,26 @@
   position: relative;
 }
 
-.Footer-BrandLinks a::before {
+.Footer-BrandLink.Footer-BrandLink::before {
   content: "—";
   opacity: 0;
   margin-right: 0;
   transition: all 0.3s ease;
 }
 
-.Footer-BrandLinks a:hover {
+.Footer-BrandLink.Footer-BrandLink:hover {
   color: #ff7043;
   opacity: 1;
   padding-left: 16px;
 }
 
-.Footer-BrandLinks a:hover::before {
+.Footer-BrandLink.Footer-BrandLink:hover::before {
   opacity: 0.5;
   margin-right: 6px;
 }
 
 /* ===== Заголовки колонок ===== */
-.Footer-Title {
+.Footer-Title.Footer-Title {
   font-weight: 700;
   font-size: 13px;
   color: #e6e1c5;
@@ -124,7 +125,7 @@
   padding-bottom: 12px;
 }
 
-.Footer-Title::after {
+.Footer-Title.Footer-Title::after {
   content: "";
   position: absolute;
   bottom: 0;
@@ -141,13 +142,13 @@
 }
 
 /* ===== Реквизиты / Контакты ===== */
-.Footer-Requisites {
+.Footer-Requisites.Footer-Requisites {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-.Footer-ContactItem {
+.Footer-ContactItem.Footer-ContactItem {
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -160,12 +161,12 @@
   padding: 2px 0;
 }
 
-.Footer-ContactItem:hover {
+.Footer-ContactItem.Footer-ContactItem:hover {
   opacity: 1;
   color: #ff7043;
 }
 
-.Footer-Icon {
+.Footer-Icon.Footer-Icon {
   flex-shrink: 0;
   font-size: 15px;
   opacity: 0.5;
@@ -179,7 +180,7 @@
 }
 
 /* ===== Нижняя плашка ===== */
-.Footer-Bottom {
+.Footer-Bottom.Footer-Bottom {
   max-width: 1200px;
   margin: 48px auto 0 auto;
   padding-top: 20px;
@@ -191,37 +192,37 @@
   letter-spacing: 0.5px;
 }
 
-.Footer-Bottom p {
+.Footer-Bottom.Footer-Bottom p {
   margin: 0;
 }
 
 /* ===== Адаптив ===== */
 @media (max-width: 1024px) {
-  .Footer-Content {
-    grid-template-columns: 1fr 1fr;
+  .Footer-Content.Footer-Content {
+    grid-template-columns: 1fr 1fr !important;
     gap: 40px;
   }
 
-  .Footer-Col-Brand {
+  .Footer-Col-Brand.Footer-Col-Brand {
     grid-column: 1 / -1;
   }
 }
 
 @media (max-width: 768px) {
-  .Footer-footer {
+  .Footer-footer.Footer-footer {
     padding: 40px 5% 20px 5%;
   }
 
-  .Footer-Content {
-    grid-template-columns: 1fr;
+  .Footer-Content.Footer-Content {
+    grid-template-columns: 1fr !important;
     gap: 32px;
   }
 
-  .Footer-Col-Brand {
+  .Footer-Col-Brand.Footer-Col-Brand {
     grid-column: auto;
   }
 
-  .Footer-Title::after {
+  .Footer-Title.Footer-Title::after {
     width: 24px;
   }
 
@@ -231,24 +232,21 @@
 }
 
 @media (max-width: 480px) {
-  .Footer-LogoText {
+  .Footer-LogoText.Footer-LogoText {
     font-size: 22px;
   }
 
-  .Footer-LogoImg {
+  .Footer-LogoImg.Footer-LogoImg {
     width: 44px;
     height: 44px;
   }
 
-  .Footer-ContactItem {
+  .Footer-ContactItem.Footer-ContactItem {
     font-size: 13px;
   }
 
-  .Footer-Title {
+  .Footer-Title.Footer-Title {
     font-size: 12px;
   }
 
-  .Footer-BrandEmail {
-    font-size: 13px;
-  }
-}
+  .Footer-BrandEmail.Footer-BrandEmail

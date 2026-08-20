@@ -31,8 +31,12 @@ export default function Footer() {
           </a>
 
           <nav className="Footer-BrandLinks">
-            <Link href="/privacy">Согласие на обработку данных</Link>
-            <Link href="/offer">Договор оферты</Link>
+            <Link href="/privacy" className="Footer-BrandLink">
+              Согласие на обработку данных
+            </Link>
+            <Link href="/offer" className="Footer-BrandLink">
+              Договор оферты
+            </Link>
           </nav>
         </div>
 
