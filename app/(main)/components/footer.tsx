@@ -49,7 +49,7 @@ export default function Footer() {
             </div>
             <div className="Footer-item">
               <span className="Footer-icon">📍</span>
-              <span>198334, город Санкт-Петербург, ул. Добровольцев, д. 44 литера А, помещ. 3-н офис 11-2 </span>
+              <span>198334, г. Санкт-Петербург, ул. Добровольцев, д. 44 литера А, помещ. 3-н офис 11-2 </span>
             </div>
           </div>
         </div>
