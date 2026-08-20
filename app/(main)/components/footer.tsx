@@ -7,8 +7,8 @@ export default function Footer() {
   return (
     <footer className="Footer-footer">
       <div className="Footer-Content">
-        {/* Колонка 1: Логотип + описание */}
-        <div className="Footer-Col Footer-Col-Logo">
+        {/* === Колонка 1: Логотип + название + контакты/документы === */}
+        <div className="Footer-Col Footer-Col-Brand">
           <div className="Footer-Logo">
             <Image
               className="Footer-LogoImg"
@@ -22,29 +22,28 @@ export default function Footer() {
               <span className="Footer-LogoText">ClusterLab</span>
             </Link>
           </div>
-        </div>
 
-        {/* Колонка 2: Документы */}
-        <div className="Footer-Col">
-          <h4 className="Footer-Title">Документы</h4>
-          <nav className="Footer-Links">
-            <Link href="/privacy">
-              <span>Согласие на обработку данных</span>
-            </Link>
-            <Link href="/offer">
-              <span>Договор оферты</span>
-            </Link>
+          <a
+            href="mailto:clusterlab.ru@gmail.com"
+            className="Footer-BrandEmail"
+          >
+            clusterlab.ru@gmail.com
+          </a>
+
+          <nav className="Footer-BrandLinks">
+            <Link href="/privacy">Согласие на обработку данных</Link>
+            <Link href="/offer">Договор оферты</Link>
           </nav>
         </div>
 
-        {/* Колонка 3: Контакты */}
+        {/* === Колонка 2: Название + юридический адрес === */}
         <div className="Footer-Col">
-          <h4 className="Footer-Title">Контакты</h4>
-          <div className="Footer-Contacts">
-            <a href="mailto:clusterlab.ru@gmail.com" className="Footer-ContactItem">
-              <span className="Footer-Icon">✉</span>
-              <span>clusterlab.ru@gmail.com</span>
-            </a>
+          <h4 className="Footer-Title">Юридический адрес</h4>
+          <div className="Footer-Requisites">
+            <div className="Footer-ContactItem">
+              <span className="Footer-Icon">🏢</span>
+              <span>ООО «КластерЛаб»</span>
+            </div>
             <div className="Footer-ContactItem">
               <span className="Footer-Icon">📍</span>
               <span>Санкт-Петербург, ул. Добровольцев, д. 44</span>
@@ -52,23 +51,23 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Колонка 4: Реквизиты */}
+        {/* === Колонка 3: Реквизиты (ИНН, ОГРН) === */}
         <div className="Footer-Col">
           <h4 className="Footer-Title">Реквизиты</h4>
           <div className="Footer-Requisites">
             <div className="Footer-ContactItem">
-              <span className="Footer-Icon">🏢</span>
-              <span>ООО «КластерЛаб»</span>
+              <span className="Footer-Icon">📋</span>
+              <span>ИНН: 7807402857</span>
             </div>
             <div className="Footer-ContactItem">
               <span className="Footer-Icon">📋</span>
-              <span>ИНН: 7807402857</span>
+              <span>ОГРН: 1187847123456</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Нижняя плашка */}
+      {/* === Нижняя плашка === */}
       <div className="Footer-Bottom">
         <p>© {new Date().getFullYear()} ClusterLab. Все права защищены.</p>
       </div>
