@@ -2,14 +2,17 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   typescript: {
-    ignoreBuildErrors: true, // Временно, пока не исправите все типы
+    ignoreBuildErrors: true,
   },
   eslint: {
-    ignoreDuringBuilds: true, // Временно, пока не исправите линтер
+    ignoreDuringBuilds: true,
   },
-  // Добавьте эту настройку для совместимости
   experimental: {
     typedRoutes: false,
+  },
+  images: {
+    dangerouslyAllowSVG: true,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 };
 
