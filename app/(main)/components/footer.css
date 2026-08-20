@@ -1,45 +1,38 @@
-/* НЕ импортируем tailwindcss здесь — это должен делать глобальный CSS */
+/* НЕ импортируем tailwindcss здесь */
 
 .Footer-footer.Footer-footer {
   width: 100%;
   background: linear-gradient(135deg, #2a1f16 0%, #3c3126 100%);
-  padding: 60px 8% 24px 8%;
+  padding: 48px 8% 24px 8%;
   font-family: "Jura", sans-serif;
   color: #e6e1c5;
   box-sizing: border-box;
   border-top: 1px solid rgba(230, 225, 197, 0.06);
 }
 
-.Footer-Content.Footer-Content {
-  display: grid !important;
-  grid-template-columns: 1.4fr 1fr 1fr !important;
-  gap: 56px;
+/* ===== Строка 1: Лого + почта + документы ===== */
+.Footer-TopRow.Footer-TopRow {
+  display: flex !important;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 32px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0 auto 40px auto;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(230, 225, 197, 0.08);
 }
 
-.Footer-Col.Footer-Col {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-/* ===== Колонка 1: Бренд ===== */
-.Footer-Col-Brand.Footer-Col-Brand {
-  gap: 14px;
-}
-
-.Footer-Logo.Footer-Logo {
+.Footer-LogoWrap.Footer-LogoWrap {
   display: flex;
   align-items: center;
   gap: 14px;
-  margin-bottom: 4px;
+  margin-right: auto;
 }
 
 .Footer-LogoImg.Footer-LogoImg {
   filter: brightness(0) invert(1);
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   transition: transform 0.3s ease;
 }
 
@@ -49,7 +42,7 @@
 
 .Footer-LogoText.Footer-LogoText {
   font-family: "Righteous", sans-serif;
-  font-size: 28px;
+  font-size: 26px;
   color: #e6e1c5;
   line-height: 1;
   transition: all 0.3s ease;
@@ -62,62 +55,61 @@
   text-shadow: 0 0 24px rgba(255, 112, 67, 0.25);
 }
 
-.Footer-BrandEmail.Footer-BrandEmail {
+.Footer-TopLink.Footer-TopLink {
   font-size: 14px;
   color: #e6e1c5;
-  opacity: 0.65;
+  opacity: 0.6;
   text-decoration: none;
   transition: all 0.3s ease;
-  width: fit-content;
+  position: relative;
+  white-space: nowrap;
 }
 
-.Footer-BrandEmail.Footer-BrandEmail:hover {
+.Footer-TopLink.Footer-TopLink::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #ff7043;
+  transition: width 0.3s ease;
+}
+
+.Footer-TopLink.Footer-TopLink:hover {
   color: #ff7043;
   opacity: 1;
 }
 
-.Footer-BrandLinks.Footer-BrandLinks {
+.Footer-TopLink.Footer-TopLink:hover::after {
+  width: 100%;
+}
+
+.Footer-TopLink--email.Footer-TopLink--email {
+  opacity: 0.85;
+}
+
+/* ===== Строка 2: 2 столбца ===== */
+.Footer-BottomRow.Footer-BottomRow {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.Footer-BottomCol.Footer-BottomCol {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 4px;
+  gap: 18px;
 }
 
-.Footer-BrandLink.Footer-BrandLink {
-  display: block;
-  color: #e6e1c5;
-  text-decoration: none;
-  font-size: 13px;
-  opacity: 0.5;
-  transition: all 0.3s ease;
-  width: fit-content;
-  position: relative;
-}
-
-.Footer-BrandLink.Footer-BrandLink::before {
-  content: "—";
-  opacity: 0;
-  margin-right: 0;
-  transition: all 0.3s ease;
-}
-
-.Footer-BrandLink.Footer-BrandLink:hover {
-  color: #ff7043;
-  opacity: 1;
-  padding-left: 16px;
-}
-
-.Footer-BrandLink.Footer-BrandLink:hover::before {
-  opacity: 0.5;
-  margin-right: 6px;
-}
-
-/* ===== Заголовки колонок ===== */
+/* ===== Заголовки ===== */
 .Footer-Title.Footer-Title {
   font-weight: 700;
   font-size: 13px;
   color: #e6e1c5;
-  margin: 0 0 2px 0;
+  margin: 0;
   text-transform: uppercase;
   letter-spacing: 1.4px;
   opacity: 0.7;
@@ -137,7 +129,7 @@
   transition: width 0.3s ease;
 }
 
-.Footer-Col:hover .Footer-Title::after {
+.Footer-BottomCol:hover .Footer-Title::after {
   width: 44px;
 }
 
@@ -182,7 +174,7 @@
 /* ===== Нижняя плашка ===== */
 .Footer-Bottom.Footer-Bottom {
   max-width: 1200px;
-  margin: 48px auto 0 auto;
+  margin: 40px auto 0 auto;
   padding-top: 20px;
   border-top: 1px solid rgba(230, 225, 197, 0.06);
   text-align: center;
@@ -197,36 +189,43 @@
 }
 
 /* ===== Адаптив ===== */
-@media (max-width: 1024px) {
-  .Footer-Content.Footer-Content {
-    grid-template-columns: 1fr 1fr !important;
-    gap: 40px;
+@media (max-width: 900px) {
+  .Footer-TopRow.Footer-TopRow {
+    gap: 20px 28px;
   }
 
-  .Footer-Col-Brand.Footer-Col-Brand {
-    grid-column: 1 / -1;
+  .Footer-TopLink.Footer-TopLink {
+    font-size: 13px;
   }
 }
 
 @media (max-width: 768px) {
   .Footer-footer.Footer-footer {
-    padding: 40px 5% 20px 5%;
+    padding: 36px 5% 20px 5%;
   }
 
-  .Footer-Content.Footer-Content {
+  .Footer-TopRow.Footer-TopRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+  }
+
+  .Footer-LogoWrap.Footer-LogoWrap {
+    margin-right: 0;
+  }
+
+  .Footer-BottomRow.Footer-BottomRow {
     grid-template-columns: 1fr !important;
-    gap: 32px;
-  }
-
-  .Footer-Col-Brand.Footer-Col-Brand {
-    grid-column: auto;
+    gap: 28px;
   }
 
   .Footer-Title.Footer-Title::after {
     width: 24px;
   }
 
-  .Footer-Col:hover .Footer-Title::after {
+  .Footer-BottomCol:hover .Footer-Title::after {
     width: 36px;
   }
 }
@@ -237,8 +236,8 @@
   }
 
   .Footer-LogoImg.Footer-LogoImg {
-    width: 44px;
-    height: 44px;
+    width: 38px;
+    height: 38px;
   }
 
   .Footer-ContactItem.Footer-ContactItem {
@@ -248,5 +247,4 @@
   .Footer-Title.Footer-Title {
     font-size: 12px;
   }
-
-  .Footer-BrandEmail.Footer-BrandEmail
+}

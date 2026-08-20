@@ -6,42 +6,41 @@ import "@/app/(auth)/components/footer.css";
 export default function Footer() {
   return (
     <footer className="Footer-footer">
-      <div className="Footer-Content">
-        {/* === Колонка 1: Логотип + название + контакты/документы === */}
-        <div className="Footer-Col Footer-Col-Brand">
-          <div className="Footer-Logo">
-            <Image
-              className="Footer-LogoImg"
-              src="/footer/Logo-Transparent.svg"
-              alt="ClusterLab Logo"
-              width={60}
-              height={60}
-              priority
-            />
-            <Link href="/">
-              <span className="Footer-LogoText">ClusterLab</span>
-            </Link>
-          </div>
-
-          <a
-            href="mailto:clusterlab.ru@gmail.com"
-            className="Footer-BrandEmail"
-          >
-            clusterlab.ru@gmail.com
-          </a>
-
-          <nav className="Footer-BrandLinks">
-            <Link href="/privacy" className="Footer-BrandLink">
-              Согласие на обработку данных
-            </Link>
-            <Link href="/offer" className="Footer-BrandLink">
-              Договор оферты
-            </Link>
-          </nav>
+      {/* === Строка 1: Лого + название, почта, документы === */}
+      <div className="Footer-TopRow">
+        <div className="Footer-LogoWrap">
+          <Image
+            className="Footer-LogoImg"
+            src="/footer/Logo-Transparent.svg"
+            alt="ClusterLab Logo"
+            width={60}
+            height={60}
+            priority
+          />
+          <Link href="/">
+            <span className="Footer-LogoText">ClusterLab</span>
+          </Link>
         </div>
 
-        {/* === Колонка 2: Название + юридический адрес === */}
-        <div className="Footer-Col">
+        <a
+          href="mailto:clusterlab.ru@gmail.com"
+          className="Footer-TopLink Footer-TopLink--email"
+        >
+          clusterlab.ru@gmail.com
+        </a>
+
+        <Link href="/privacy" className="Footer-TopLink">
+          Согласие на обработку данных
+        </Link>
+
+        <Link href="/offer" className="Footer-TopLink">
+          Договор оферты
+        </Link>
+      </div>
+
+      {/* === Строка 2: Юр. адрес | Реквизиты === */}
+      <div className="Footer-BottomRow">
+        <div className="Footer-BottomCol">
           <h4 className="Footer-Title">Юридический адрес</h4>
           <div className="Footer-Requisites">
             <div className="Footer-ContactItem">
@@ -55,8 +54,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* === Колонка 3: Реквизиты (ИНН, ОГРН) === */}
-        <div className="Footer-Col">
+        <div className="Footer-BottomCol">
           <h4 className="Footer-Title">Реквизиты</h4>
           <div className="Footer-Requisites">
             <div className="Footer-ContactItem">
