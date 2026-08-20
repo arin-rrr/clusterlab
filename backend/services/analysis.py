@@ -448,7 +448,7 @@ def clean_json_response(raw_text: str) -> str:
     return re.sub(r"^```(?:json)?|```$", "", raw_text.strip(), flags=re.MULTILINE).strip()
 
 
-async def get_llm_recommendations(field_info, cluster_stats: list[dict], retries: int = 2) -> list[dict]:
+async def get_llm_recommendations(field_info, cluster_stats: list[dict], retries: int = 4) -> list[dict]:
     prompt = build_llm_prompt(field_info, cluster_stats)
 
     last_error = None
@@ -462,8 +462,9 @@ async def get_llm_recommendations(field_info, cluster_stats: list[dict], retries
             return json.loads(cleaned)
         except Exception as e:
             last_error = e
-            print(f"!!! [LLM RETRY {attempt + 1}/{retries + 1}] {e}", flush=True)
-            await asyncio.sleep(2)
+            wait = 2 * (attempt + 1)  # растущая пауза: 2, 4, 6, 8 секунд
+            print(f"!!! [LLM RETRY {attempt + 1}/{retries + 1}] {e}, жду {wait}с", flush=True)
+            await asyncio.sleep(wait)
 
     raise last_error
 
