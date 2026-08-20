@@ -57,8 +57,7 @@ function evaluatePixel(sample) {
 }
 """
 
-# УДАЛИ старую функцию download_field_data (она с sentinelhub)
-# и ВСТАВЬ эту:
+
 
 from pystac_client import Client
 import rasterio
@@ -449,15 +448,24 @@ def clean_json_response(raw_text: str) -> str:
     return re.sub(r"^```(?:json)?|```$", "", raw_text.strip(), flags=re.MULTILINE).strip()
 
 
-async def get_llm_recommendations(field_info, cluster_stats: list[dict]) -> list[dict]:
+async def get_llm_recommendations(field_info, cluster_stats: list[dict], retries: int = 2) -> list[dict]:
     prompt = build_llm_prompt(field_info, cluster_stats)
 
-    response = await asyncio.to_thread(gigachat_client.chat, prompt)
-    raw_text = response.choices[0].message.content
-    print(f"[GIGACHAT RAW] {raw_text}")  # временно — чтобы видеть сырой ответ в консоли
+    last_error = None
+    for attempt in range(retries + 1):
+        try:
+            response = await asyncio.to_thread(gigachat_client.chat, prompt)
+            raw_text = response.choices[0].message.content
+            print(f"[GIGACHAT RAW] {raw_text}", flush=True)
 
-    cleaned = clean_json_response(raw_text)
-    return json.loads(cleaned)
+            cleaned = clean_json_response(raw_text)
+            return json.loads(cleaned)
+        except Exception as e:
+            last_error = e
+            print(f"!!! [LLM RETRY {attempt + 1}/{retries + 1}] {e}", flush=True)
+            await asyncio.sleep(2)
+
+    raise last_error
 
 def build_cluster_polygons(lat, lon, radius, map_data: dict) -> dict[int, "shapely.geometry.base.BaseGeometry"]:
     """
