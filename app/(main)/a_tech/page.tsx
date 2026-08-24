@@ -145,18 +145,6 @@ export default function A_TechPage() {
       <div className="A-Tech-Page-Block-4">
         <h2 className="A-Tech-Page-Block-4-Header">Медия и ресурсы</h2>
         <div className="A-Tech-Page-Block-4-Cards-Container">
-          <div className="A-Tech-Page-Block-4-Video">
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="A-Tech-Page-Block-4-My-Video"
-            >
-              <source src="/a-tech/satellite_video.mp4" type="video/mp4"/>
-              Ваш браузер не поддерживает видео.
-            </video>
-          </div>
 
           <div className="A-Tech-Page-Block-4-Image">
             <Image
