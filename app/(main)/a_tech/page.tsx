@@ -153,7 +153,7 @@ export default function A_TechPage() {
               playsInline
               className="A-Tech-Page-Block-4-My-Video"
             >
-              <source src="/a-tech/satellite_video.mp4" type="video/mp4" />
+              <source src="/a-tech/satellite_video.mp4" type="video/mp4"/>
               Ваш браузер не поддерживает видео.
             </video>
           </div>
