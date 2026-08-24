@@ -33,7 +33,7 @@ export default function Footer() {
 
         <span className="Footer-separator">|</span>
 
-        <Link href="/documents/oferta.pdf" className="Footer-topLink">
+        <Link href="public/documents/oferta.pdf" className="Footer-topLink">
           Публичная оферта
         </Link>
       </div>
