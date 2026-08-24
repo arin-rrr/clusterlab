@@ -34,7 +34,7 @@ export default function Footer() {
         <span className="Footer-separator">|</span>
 
         <Link href="/offer" className="Footer-topLink">
-          Договор оферты
+          Публичная оферта
         </Link>
       </div>
 

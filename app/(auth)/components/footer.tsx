@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="AuthFooter">
       <nav className="AuthFooter-Links">
         <a href="/privacy">Согласие на обработку персональных данных</a>
-        <a href="/offer">Договор оферты</a>
+        <a href="/offer">Публичная оферта</a>
       </nav>
       <a href="mailto:clusterlab.ru@gmail.com" className="AuthFooter-Mail">
         clusterlab.ru@gmail.com
