@@ -2,35 +2,41 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   padding: 24px 20px;
   font-family: "Jura", sans-serif;
+  background-color: #3c3126;
 }
 
 .AuthFooter-Links {
   display: flex;
-  gap: 20px;
+  gap: 24px;
   flex-wrap: wrap;
   justify-content: center;
 }
 
 .AuthFooter-Links a {
-  font-size: 13px;
-  color: rgba(60, 49, 38, 0.6);
+  font-size: 15px;
+  color: #e8dcc4;
+  opacity: 0.75;
   text-decoration: none;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .AuthFooter-Links a:hover {
   color: #ff7043;
+  opacity: 1;
 }
 
 .AuthFooter-Mail {
-  font-size: 13px;
-  color: rgba(60, 49, 38, 0.5);
+  font-size: 15px;
+  color: #e8dcc4;
+  opacity: 0.6;
   text-decoration: none;
+  transition: all 0.2s ease;
 }
 
 .AuthFooter-Mail:hover {
   color: #ff7043;
+  opacity: 1;
 }
