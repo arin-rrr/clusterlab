@@ -1,70 +1,36 @@
-@import "tailwindcss";
-
-.Footer-footer {
+.AuthFooter {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  padding: 20px 5%;
-  background-color: #3c3126;
-  box-shadow: none;
-  position: relative;
-  z-index: 1;
-}
-
-.Footer-Logo {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.Footer-LogoText {
-  font-family: "Righteous", sans-serif;
-  font-size: 38px;
-  color: #e8dcc4;
-  line-height: 1;
-  margin: 0;
-}
-
-.Footer-Mail {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.Footer-MailText {
+  gap: 8px;
+  padding: 24px 20px;
   font-family: "Jura", sans-serif;
-  font-size: 20px;
-  color: #e8dcc4;
-  line-height: 1;
 }
 
-.Footer-Pages {
+.AuthFooter-Links {
   display: flex;
-  align-items: center;
-  gap: 60px;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.Footer-Pages p {
-  font-family: "Jura", sans-serif;
+.AuthFooter-Links a {
+  font-size: 13px;
+  color: rgba(60, 49, 38, 0.6);
   text-decoration: none;
-  color: #e8dcc4;
-  font-weight: 700;
-  font-size: 18px;
-  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
-  transition: all 0.3s ease;
-  margin: 0;
+  transition: color 0.2s ease;
 }
 
-.Footer-Pages p:hover {
+.AuthFooter-Links a:hover {
   color: #ff7043;
-  text-shadow: 0px 0px 12px rgba(255, 112, 67, 0.5);
 }
 
-.Footer-PersonalData {
-  font-family: "Jura", sans-serif;
-  font-size: 20px;
-  color: #e8dcc4;
-  line-height: 1;
-  display: flex;
-  align-items: center;
+.AuthFooter-Mail {
+  font-size: 13px;
+  color: rgba(60, 49, 38, 0.5);
+  text-decoration: none;
+}
+
+.AuthFooter-Mail:hover {
+  color: #ff7043;
 }
