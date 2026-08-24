@@ -1,5 +1,5 @@
 import React from "react";
-import "@/app/(main)/components/auth-footer.css";
+import "@/app/(auth)/components/footer.css";
 
 export default function Footer() {
   return (
