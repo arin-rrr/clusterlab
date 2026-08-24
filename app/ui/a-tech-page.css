@@ -200,32 +200,16 @@ p {
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   color: #3c3126;
 }
+
 .A-Tech-Page-Block-4-Cards-Container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 
-  max-width: 1400px; /* Чтобы блок не растягивался на весь экран */
-  margin: 0 auto; /* Центрируем контейнер */
-  padding: 0 1rem; /* Это «отлепит» видео от левого края */
-
-  justify-items: center;
-  justify-self: center;
-}
-
-.A-Tech-Page-Block-4-Video {
-  width: 100%;
-  max-width: 800px;
-  border-radius: 0 30px 30px 30px;
-  overflow: hidden;
-}
-
-.A-Tech-Page-Block-4-My-Video {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  transform: scale(1.01);
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .A-Tech-Page-Block-4-ImgTitle {
