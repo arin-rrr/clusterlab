@@ -27,9 +27,9 @@ export default function Footer() {
 
         <span className="Footer-separator">|</span>
 
-        <Link href="/privacy" className="Footer-topLink">
+        <a href="/documents/privacy-policy.pdf" target="_blank" rel="noopener noreferrer" className="Footer-topLink">
           Политика обработки персональных данных
-        </Link>
+        </a>
 
         <span className="Footer-separator">|</span>
 
