@@ -11,11 +11,17 @@ export default function Sign_Up() {
   const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    if (!agreed) {
+      setError("Необходимо согласиться с условиями обработки данных");
+      return;
+    }
 
     try {
       const response = await fetch("http://127.0.0.1:8000/users/", {
@@ -31,7 +37,6 @@ export default function Sign_Up() {
       });
 
       if (response.ok) {
-        // Регистрация больше не логинит сразу — нужно подтвердить почту кодом
         router.push(`/verify?email=${encodeURIComponent(email)}`);
       } else {
         const errorData = await response.json();
@@ -91,9 +96,29 @@ export default function Sign_Up() {
             />
           </div>
 
+          <div className="consent-group">
+            <label className="consent-label">
+              <input
+                type="checkbox"
+                checked={agreed}
+                onChange={(e) => setAgreed(e.target.checked)}
+              />
+              <span>
+                Я согласен(на) с{" "}
+                <Link href="/privacy" target="_blank">
+                  Политикой обработки персональных данных
+                </Link>{" "}
+                и{" "}
+                <Link href="/offer" target="_blank">
+                  Договором публичной оферты
+                </Link>
+              </span>
+            </label>
+          </div>
+
           {error && <p className="error-message">{error}</p>}
 
-          <button type="submit" className="auth-button">
+          <button type="submit" className="auth-button" disabled={!agreed}>
             Создать аккаунт
           </button>
         </form>
