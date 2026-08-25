@@ -105,13 +105,13 @@ export default function Sign_Up() {
               />
               <span>
                 Я согласен(на) с{" "}
-                <Link href="/privacy" target="_blank">
+                <a href="/documents/privacy-policy.pdf" target="_blank" >
                   Политикой обработки персональных данных
-                </Link>{" "}
+                </a>{" "}
                 и{" "}
-                <Link href="/offer" target="_blank">
+                <a href="/documents/oferta.pdf" target="_blank" >
                   Договором публичной оферты
-                </Link>
+                </a>
               </span>
             </label>
           </div>
