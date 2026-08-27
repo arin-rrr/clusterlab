@@ -30,6 +30,9 @@ import json
 import shapefile  # pyshp
 import io
 import zipfile
+import os
+
+os.environ["GDAL_HTTP_UNSAFESSL"] = "YES"
 
 env_path = Path(__file__).parent.parent / ".env"
 load_dotenv(dotenv_path=env_path)
