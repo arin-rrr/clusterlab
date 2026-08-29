@@ -25,7 +25,8 @@ export default function Sign_InPage() {
     formData.append("password", password);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/users/token", {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+      const response = await fetch(`${API_URL}/users/`, {
         // Замени на свой URL
         method: "POST",
         headers: {
