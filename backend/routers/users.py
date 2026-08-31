@@ -64,7 +64,7 @@ async def create_user(user: UserCreate, db: AsyncSession = Depends(get_async_db)
         full_name=user.full_name,
         is_verified=False,
         verification_code=code,
-        verification_code_expires=datetime.now(timezone.utc) + timedelta(minutes=15),
+        verification_code_expires=datetime.utcnow() + timedelta(minutes=15),
     )
 
     db.add(db_user)
