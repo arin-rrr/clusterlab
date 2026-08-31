@@ -179,7 +179,8 @@ async def resend_code(payload: ResendCodeRequest, db: AsyncSession = Depends(get
 
     code = generate_verification_code()
     user.verification_code = code
-    user.verification_code_expires = datetime.now(timezone.utc) + timedelta(minutes=15)
+
+    user.verification_code_expires = datetime.utcnow() + timedelta(minutes=15)
     await db.commit()
 
     await asyncio.to_thread(send_verification_email, user.email, code)
