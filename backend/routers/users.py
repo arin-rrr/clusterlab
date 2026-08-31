@@ -10,7 +10,7 @@ from backend.db_depends import get_async_db
 from backend.auth import hash_password, verify_password, create_access_token, get_current_user
 from sqlalchemy import func
 from backend.models.fields import Field as FieldModel
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from backend.auth import (
     hash_password, verify_password, create_access_token, get_current_user,
     generate_verification_code, send_verification_email,
