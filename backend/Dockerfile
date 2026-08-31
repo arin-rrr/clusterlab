@@ -1,7 +1,7 @@
 FROM python:3.12-slim
 
 WORKDIR /app
-
+RUN pip install --no-cache-dir --no-binary=rasterio rasterio
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         libexpat1 \
