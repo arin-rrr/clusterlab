@@ -64,14 +64,15 @@ async def create_user(user: UserCreate, db: AsyncSession = Depends(get_async_db)
         full_name=user.full_name,
         is_verified=False,
         verification_code=code,
-        verification_code_expires=datetime.now() + timedelta(minutes=15),
+        verification_code_expires=datetime.now(timezone.utc) + timedelta(minutes=15),
     )
 
     db.add(db_user)
     await db.commit()
     await db.refresh(db_user)
 
-    send_verification_email(user.email, code)
+    # Не блокируем сервер на отправку письма
+    await asyncio.to_thread(send_verification_email, user.email, code)
 
     return db_user
 @router.post('/token')
@@ -150,7 +151,8 @@ async def verify_email(payload: VerifyCodeRequest, db: AsyncSession = Depends(ge
     if user.verification_code != payload.code:
         raise HTTPException(400, detail="Неверный код")
 
-    if datetime.now() > user.verification_code_expires:
+    # Сравнение теперь корректное: оба aware
+    if datetime.now(timezone.utc) > user.verification_code_expires:
         raise HTTPException(400, detail="Код истёк, запросите новый")
 
     user.is_verified = True
@@ -177,9 +179,9 @@ async def resend_code(payload: ResendCodeRequest, db: AsyncSession = Depends(get
 
     code = generate_verification_code()
     user.verification_code = code
-    user.verification_code_expires = datetime.now() + timedelta(minutes=15)
+    user.verification_code_expires = datetime.now(timezone.utc) + timedelta(minutes=15)
     await db.commit()
 
-    send_verification_email(user.email, code)
+    await asyncio.to_thread(send_verification_email, user.email, code)
 
     return {"detail": "Код отправлен повторно"}
