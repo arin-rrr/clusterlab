@@ -16,13 +16,15 @@ export default function VerifyPage() {
   const [resending, setResending] = useState(false);
   const [resendMessage, setResendMessage] = useState("");
 
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:8000/users/verify", {
+      const response = await fetch(`${API_URL}/users/verify`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, code }),
@@ -45,7 +47,7 @@ export default function VerifyPage() {
     setResending(true);
     setResendMessage("");
     try {
-      const response = await fetch("http://localhost:8000/users/resend_code", {
+      const response = await fetch(`${API_URL}/users/resend_code`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
