@@ -5,7 +5,7 @@ DATABASE_URL='postgresql+asyncpg://neondb_owner:npg_oWXjymT9za3F@ep-floral-bird-
 # Создаём Engine
 async_engine = create_async_engine(DATABASE_URL,
                                    pool_pre_ping=True,  # проверяет соединение перед использованием
-                                   pool_recycle=1800,
+                                   pool_recycle=1801,
                                    echo=True)
 
 # Настраиваем фабрику сеансов
