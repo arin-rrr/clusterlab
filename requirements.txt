@@ -140,3 +140,4 @@ wrapt==2.3.0
 xarray==2026.7.0
 xyzservices==2026.3.0
 yookassa==3.12.1
+resend
