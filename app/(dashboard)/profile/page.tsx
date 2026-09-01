@@ -11,6 +11,8 @@ interface UserData {
   totalHectares: number;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+
 export default function ProfilePage() {
   const router = useRouter();
   const [userData, setUserData] = useState<UserData | null>(null); // Изначально данных нет
@@ -27,7 +29,7 @@ export default function ProfilePage() {
 
       try {
         const response = await fetch(
-          "http://localhost:8000/users/personal_info",
+          `${API_URL}/users/personal_info`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

@@ -52,6 +52,8 @@ const CLUSTER_COLORS = [
   "#29B6F6",
 ];
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+
 export default function FieldResultPage() {
   const params = useParams();
   const id = params.id as string;
@@ -63,7 +65,7 @@ export default function FieldResultPage() {
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
-    fetch(`http://localhost:8000/fields/${id}/result`, {
+    fetch(`${API_URL}/fields/${id}/result`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then(async (res) => {
@@ -78,7 +80,7 @@ export default function FieldResultPage() {
     if (data?.status !== "Готово") return;
 
     const token = localStorage.getItem("access_token");
-    fetch(`http://localhost:8000/fields/${id}/map`, {
+    fetch(`${API_URL}/fields/${id}/map`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.text())
@@ -90,7 +92,7 @@ export default function FieldResultPage() {
     if (data?.status !== "Готово") return;
 
     const token = localStorage.getItem("access_token");
-    fetch(`http://localhost:8000/fields/${id}/recommendations`, {
+    fetch(`${API_URL}/fields/${id}/recommendations`, {
       headers: { Authorization: `Bearer ${token}` },
     })
       .then((res) => res.json())
@@ -102,7 +104,7 @@ export default function FieldResultPage() {
     setDownloading(true);
     try {
       const token = localStorage.getItem("access_token");
-      const res = await fetch(`http://localhost:8000/fields/${id}/export/shapefile`, {
+      const res = await fetch(`${API_URL}/fields/${id}/export/shapefile`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!res.ok) {

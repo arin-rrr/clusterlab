@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+
 export default function NewFieldPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -42,7 +44,7 @@ export default function NewFieldPage() {
     };
 
     try {
-      const response = await fetch("http://localhost:8000/fields/analyze", {
+      const response = await fetch(`${API_URL}/fields/analyze`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
