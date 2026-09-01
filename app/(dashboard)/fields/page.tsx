@@ -11,27 +11,31 @@ interface Field {
   created_at: string;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+
 export default function FieldsPage() {
   const [fields, setFields] = useState<Field[]>([]);
   const [loading, setLoading] = useState(true);
 
-    const fetchFields = useCallback(async () => {
-      try {
-        const token = localStorage.getItem("access_token");
-        const response = await fetch("http://localhost:8000/fields/my_fields", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          const sorted = [...data].sort((a: Field, b: Field) => b.id - a.id);
-          setFields(sorted);
-        }
-      } catch (error) {
-        console.error("Ошибка загрузки полей:", error);
-      } finally {
-        setLoading(false);
+  const fetchFields = useCallback(async () => {
+    try {
+      const token = localStorage.getItem("access_token");
+      const response = await fetch(`${API_URL}/fields/my_fields`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        const sorted = [...data].sort((a: Field, b: Field) => b.id - a.id);
+        setFields(sorted);
+      } else {
+        console.error("Ошибка загрузки полей, статус:", response.status);
       }
-    }, []);
+    } catch (error) {
+      console.error("Ошибка загрузки полей:", error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     fetchFields();
