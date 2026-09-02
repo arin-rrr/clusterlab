@@ -4,6 +4,7 @@ from sqlalchemy import select
 import asyncio
 from datetime import datetime
 from decimal import Decimal
+from datetime import timezone
 
 from backend.models.fields import Field as FieldModel
 from backend.schema import FieldCreate, Field as FieldSchema
@@ -63,7 +64,7 @@ async def create_field(
     calculated_area_float = ((2*payload.radius) ** 2) / 10000
     calculated_area = Decimal(str(round(calculated_area_float, 2)))
 
-    if datetime.now() > current_user.tariff_ends_at:
+    if datetime.now(timezone.utc) > current_user.tariff_ends_at:
         raise HTTPException(403, detail='Срок подписки завершён')
 
     # Считаем реально использованную площадь на лету, а не по хранимому счётчику
