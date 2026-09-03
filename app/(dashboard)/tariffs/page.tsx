@@ -27,7 +27,6 @@ const TARIFFS = [
       "Больше площади для анализа",
       "Приоритетная обработка",
     ],
-    highlighted: true,
   },
 ];
 
@@ -73,14 +72,7 @@ export default function UpgradePage() {
 
       <div className="Upgrade-Cards">
         {TARIFFS.map((tariff) => (
-          <div
-            key={tariff.id}
-            className={`Tariff-Card ${tariff.highlighted ? "Tariff-Card--highlighted" : ""}`}
-          >
-            {tariff.highlighted && (
-              <span className="Tariff-Badge">Популярный</span>
-            )}
-
+          <div key={tariff.id} className="Tariff-Card">
             <h3 className="Tariff-Name">{tariff.name}</h3>
 
             <div className="Tariff-Price">
