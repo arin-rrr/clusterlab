@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import "@/app/ui/upgrade.css";
+import "@/app/ui/tariffs.css";
 
 const TARIFFS = [
   {
