@@ -1,0 +1,143 @@
+.Upgrade-Page {
+  background-color: #e6e1c5;
+  min-height: 100vh;
+  padding: 40px;
+  color: #3c3126;
+}
+
+.Upgrade-Title {
+  font-weight: 700;
+  font-size: 2.2rem;
+  margin: 0 0 8px 0;
+}
+
+.Upgrade-Subtitle {
+  color: rgba(60, 49, 38, 0.7);
+  margin: 0 0 40px 0;
+}
+
+.Upgrade-Error {
+  color: #ff7043;
+  margin-bottom: 20px;
+}
+
+.Upgrade-Cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 340px));
+  gap: 32px;
+}
+
+.Tariff-Card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 36px 30px;
+  box-shadow: 0 4px 20px rgba(60, 49, 38, 0.08);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.Tariff-Card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(60, 49, 38, 0.12);
+}
+
+.Tariff-Card--highlighted {
+  border: 2px solid #ff7043;
+}
+
+.Tariff-Badge {
+  position: absolute;
+  top: -14px;
+  right: 24px;
+  background-color: #ff7043;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 6px 16px;
+  border-radius: 50px;
+}
+
+.Tariff-Name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 16px 0;
+}
+
+.Tariff-Price {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.Tariff-Price-Value {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.Tariff-Price-Period {
+  color: rgba(60, 49, 38, 0.5);
+  font-size: 0.9rem;
+}
+
+.Tariff-Area {
+  color: #6b9b7a;
+  font-weight: 700;
+  margin: 0 0 24px 0;
+}
+
+.Tariff-Features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
+}
+
+.Tariff-Features li {
+  padding-left: 24px;
+  position: relative;
+  font-size: 0.9rem;
+  color: rgba(60, 49, 38, 0.85);
+}
+
+.Tariff-Features li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #6b9b7a;
+  font-weight: 700;
+}
+
+.Tariff-Button {
+  background-color: #ff7043;
+  color: #ffffff;
+  border: none;
+  padding: 15px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.Tariff-Button:hover:not(:disabled) {
+  background-color: #f4511e;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 112, 67, 0.3);
+}
+
+.Tariff-Button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+  .Upgrade-Cards {
+    grid-template-columns: 1fr;
+  }
+}
