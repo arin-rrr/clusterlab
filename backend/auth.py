@@ -8,6 +8,8 @@ from sqlalchemy import select
 import bcrypt
 import os
 import resend
+import smtplib
+from email.mime.text import MIMEText
 
 from backend.models.users import User as UserModel
 from backend.config import SECRET_KEY, ALGORITHM
@@ -90,16 +92,17 @@ def generate_verification_code() -> str:
 
 
 def send_verification_email(to_email: str, code: str):
-    try:
-        resend.Emails.send({
-            "from": "ClusterLab <onboarding@resend.dev>",
-            "to": [to_email],
-            "subject": "Подтверждение регистрации в ClusterLab",
-            "html": f"<strong>Ваш код подтверждения: {code}</strong><p>Код действителен 15 минут.</p>",
-        })
-    except Exception as e:
-        print(f"Failed to send verification email to {to_email}: {e}")
+    sender = os.getenv("GMAIL_EMAIL")
+    password = os.getenv("GMAIL_APP_PASSWORD")
 
+    msg = MIMEText(f"Ваш код подтверждения: {code}\n\nКод действителен 15 минут.")
+    msg["Subject"] = "Подтверждение регистрации в ClusterLab"
+    msg["From"] = sender
+    msg["To"] = to_email
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(sender, password)
+        server.sendmail(sender, [to_email], msg.as_string())
 # from passlib.context import CryptContext
 # from fastapi.security import OAuth2PasswordBearer
 # from datetime import datetime, timedelta, timezone
