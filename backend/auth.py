@@ -94,7 +94,7 @@ def generate_verification_code() -> str:
 def send_verification_email(to_email: str, code: str):
     try:
         resend.Emails.send({
-            "from": "ClusterLab <onboarding@resend.dev>",
+            "from": "ClusterLab <onboarding@clusterlab.site>",
             "to": [to_email],
             "subject": "Подтверждение регистрации в ClusterLab",
             "html": f"<strong>Ваш код подтверждения: {code}</strong><p>Код действителен 15 минут.</p>",
