@@ -10,6 +10,8 @@ import os
 import resend
 import smtplib
 from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+import socket
 
 from backend.models.users import User as UserModel
 from backend.config import SECRET_KEY, ALGORITHM
@@ -95,14 +97,47 @@ def send_verification_email(to_email: str, code: str):
     sender = os.getenv("GMAIL_EMAIL")
     password = os.getenv("GMAIL_APP_PASSWORD")
 
-    msg = MIMEText(f"Ваш код подтверждения: {code}\n\nКод действителен 15 минут.")
-    msg["Subject"] = "Подтверждение регистрации в ClusterLab"
+    if not sender or not password:
+        raise ValueError("GMAIL_EMAIL или GMAIL_APP_PASSWORD не установлены в окружении")
+
+    # Создаём письмо
+    msg = MIMEMultipart()
     msg["From"] = sender
     msg["To"] = to_email
+    msg["Subject"] = "Подтверждение регистрации в ClusterLab"
 
-    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
-        server.login(sender, password)
-        server.sendmail(sender, [to_email], msg.as_string())
+    body = f"""Ваш код подтверждения: {code}
+
+Код действителен 15 минут.
+
+Если вы не регистрировались в ClusterLab — просто проигнорируйте это письмо.
+"""
+    msg.attach(MIMEText(body, "plain", "utf-8"))
+
+    # Пробуем сначала порт 587 (STARTTLS) — он чаще работает в контейнерах
+    try:
+        print(f"[SMTP] Подключаюсь к smtp.gmail.com:587...")
+        with smtplib.SMTP("smtp.gmail.com", 587, timeout=15) as server:
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
+            server.login(sender, password)
+            server.sendmail(sender, [to_email], msg.as_string())
+        print(f"[SMTP] Письмо успешно отправлено на {to_email}")
+        return
+    except Exception as e:
+        print(f"[SMTP] Порт 587 не сработал: {type(e).__name__}: {e}")
+
+    # Если 587 не сработал — пробуем 465 (SSL)
+    try:
+        print(f"[SMTP] Пробую порт 465...")
+        with smtplib.SMTP_SSL("smtp.gmail.com", 465, timeout=15) as server:
+            server.login(sender, password)
+            server.sendmail(sender, [to_email], msg.as_string())
+        print(f"[SMTP] Письмо успешно отправлено на {to_email} через 465")
+    except Exception as e:
+        print(f"[SMTP] Порт 465 тоже не сработал: {type(e).__name__}: {e}")
+        raise  # пробрасываем ошибку выше
 # from passlib.context import CryptContext
 # from fastapi.security import OAuth2PasswordBearer
 # from datetime import datetime, timedelta, timezone
