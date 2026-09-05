@@ -22,7 +22,7 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")  # объек�
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl='users/token')
 
-resend.api_key = os.environ.get("RESEND_API_KEY")
+#resend.api_key = os.environ.get("RESEND_API_KEY")
 
 
 def hash_password(password: str) -> str:
