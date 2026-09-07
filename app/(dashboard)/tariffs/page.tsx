@@ -35,30 +35,20 @@ export default function UpgradePage() {
   const [error, setError] = useState("");
 
   const handleUpgrade = async (tariff: string) => {
-    setError("");
-    setLoadingTariff(tariff);
-
-    try {
       const token = localStorage.getItem("access_token");
-      const response = await fetch(
-        `http://localhost:8000/payments/create?tariff=${tariff}`,
-        {
-          method: "POST",
-          headers: { Authorization: `Bearer ${token}` },
-        }
-      );
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "https://clusterlab-production.up.railway.app";
+
+      const response = await fetch(`${API_URL}/payments/create?tariff=${tariff}`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       if (response.ok) {
         const data = await response.json();
-        window.location.href = data.confirmation_url;
+        window.location.href = data.confirmation_url;  // Шаг 2: редирект пользователя на оплату
       } else {
-        setError("Не удалось создать платёж. Попробуйте позже.");
+        alert("Не удалось создать платёж");
       }
-    } catch {
-      setError("Не удалось связаться с сервером.");
-    } finally {
-      setLoadingTariff(null);
-    }
   };
 
   return (

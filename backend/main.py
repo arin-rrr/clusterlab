@@ -15,10 +15,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-from backend.routers import users, fields
+from backend.routers import users, fields, payments
 app.include_router(users.router)
 app.include_router(fields.router)
-
+app.include_router(payments.router)
 
 
 @app.get('/')
