@@ -21,7 +21,8 @@ async def create_payment_endpoint(
     if tariff not in TARIFF_PRICES:
         raise HTTPException(400, detail="Неизвестный тариф")
 
-    payment = create_payment(current_user.id, tariff)
+    # передаём email — он нужен для фискального чека (54-ФЗ)
+    payment = create_payment(current_user.id, current_user.email, tariff)
 
     new_payment = PaymentModel(
         user_id=current_user.id,
@@ -33,14 +34,14 @@ async def create_payment_endpoint(
     db.add(new_payment)
     await db.commit()
 
-    # Шаг 2 инструкции: отдаём confirmation_url, фронтенд редиректит пользователя туда
+    # отдаём confirmation_url, фронтенд редиректит пользователя туда
     return {"confirmation_url": payment.confirmation.confirmation_url}
 
 
 @router.post('/webhook')
 async def payment_webhook(request: Request, db: AsyncSession = Depends(get_async_db)):
     """
-    Шаг 3 инструкции: ЮKassa уведомляет нас, когда платёж переходит в 'succeeded'.
+    ЮKassa уведомляет нас, когда платёж переходит в 'succeeded'.
     """
     data = await request.json()
 
@@ -65,6 +66,9 @@ async def payment_webhook(request: Request, db: AsyncSession = Depends(get_async
     tariff = payment_obj["metadata"]["tariff"]
 
     user = await db.get(UserModel, user_id)
+    if not user:
+        return {"status": "unknown user"}  # если запись платежа есть, а пользователя — нет
+
     user.tariff = tariff
     user.max_area = TARIFF_PRICES[tariff]["max_area"]
     user.tariff_ends_at = datetime.now() + timedelta(days=30)
