@@ -60,5 +60,6 @@ def create_payment(user_id: int, user_email: str, tariff: str):
 
     except BadRequestError as e:
         raise HTTPException(status_code=400, detail=f"Ошибка ЮKassa: {e}")
+    print("FRONTEND_URL =", frontend_url)
 
     return payment
