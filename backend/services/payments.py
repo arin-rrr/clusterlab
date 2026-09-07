@@ -1,11 +1,6 @@
 import os
 import uuid
 from yookassa import Configuration, Payment as YKPayment
-from dotenv import load_dotenv
-from pathlib import Path
-
-env_path = Path(__file__).parent.parent / ".env"
-load_dotenv(dotenv_path=env_path)
 
 Configuration.account_id = os.getenv("YOOKASSA_SHOP_ID")
 Configuration.secret_key = os.getenv("YOOKASSA_SECRET_KEY")
@@ -16,22 +11,25 @@ TARIFF_PRICES = {
 }
 
 
-def create_payment(user_id: int, tariff: str, return_url: str):
+def create_payment(user_id: int, tariff: str):
     if tariff not in TARIFF_PRICES:
         raise ValueError("Неизвестный тариф")
 
     amount = TARIFF_PRICES[tariff]["amount"]
-    idempotence_key = str(uuid.uuid4())
+    frontend_url = os.getenv("FRONTEND_URL", "https://clusterlab.site")
 
     payment = YKPayment.create({
-        "amount": {"value": f"{amount:.2f}", "currency": "RUB"},
+        "amount": {
+            "value": f"{amount:.2f}",
+            "currency": "RUB"
+        },
         "confirmation": {
             "type": "redirect",
-            "return_url": return_url,
+            "return_url": f"{frontend_url}/profile"
         },
         "capture": True,
         "description": f"Подписка «{tariff}» — ClusterLab",
         "metadata": {"user_id": str(user_id), "tariff": tariff},
-    }, idempotence_key)
+    }, str(uuid.uuid4()))  # ключ идемпотентности — случайное значение, как в инструкции
 
     return payment
