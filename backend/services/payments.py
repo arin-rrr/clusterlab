@@ -49,7 +49,9 @@ def create_payment(user_id: int, user_email: str, tariff: str):
                             "value": amount,
                             "currency": "RUB"
                         },
-                        "vat_code": VAT_CODE
+                        "vat_code": VAT_CODE,
+                        "payment_subject": "service",  # ← добавить
+                        "payment_mode": "full_payment"  # ← добавить (обычно тоже требуется)
                     }
                 ]
             },
