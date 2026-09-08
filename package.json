@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
+  "dev": "next dev",
+  "build": "next build",
+  "start": "node .next/standalone/server.js",
+  "lint": "eslint"
+},
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
     "leaflet": "^1.9.4",
