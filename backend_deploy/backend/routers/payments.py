@@ -3,11 +3,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from datetime import datetime, timedelta
 
-from backend_deploy.backend.db_depends import get_async_db
-from backend_deploy.backend.auth import get_current_user
-from backend_deploy.backend.models.payment import Payment as PaymentModel
-from backend_deploy.backend.models.users import User as UserModel
-from backend_deploy.backend.services.payments import create_payment, TARIFF_PRICES
+from backend.db_depends import get_async_db
+from backend.auth import get_current_user
+from backend.models.payment import Payment as PaymentModel
+from backend.models.users import User as UserModel
+from backend.services.payments import create_payment, TARIFF_PRICES
 
 router = APIRouter(prefix='/payments', tags=['payments'])
 

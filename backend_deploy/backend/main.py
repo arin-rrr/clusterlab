@@ -15,7 +15,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-from backend_deploy.backend.routers import users, fields, payments
+from backend.routers import users, fields, payments
 
 app.include_router(users.router)
 app.include_router(fields.router)

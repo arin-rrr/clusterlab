@@ -11,9 +11,9 @@ import resend
 import smtplib
 from email.mime.text import MIMEText
 
-from backend_deploy.backend.models.users import User as UserModel
-from backend_deploy.backend.config import SECRET_KEY, ALGORITHM
-from backend_deploy.backend.db_depends import get_async_db
+from backend.models.users import User as UserModel
+from backend.config import SECRET_KEY, ALGORITHM
+from backend.db_depends import get_async_db
 import random
 import string
 

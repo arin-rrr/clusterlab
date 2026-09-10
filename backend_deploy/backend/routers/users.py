@@ -3,15 +3,15 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from fastapi.security import OAuth2PasswordRequestForm
 import asyncio
-from backend_deploy.backend.models.users import User as UserModel
+from backend.models.users import User as UserModel
 from pydantic import BaseModel
-from backend_deploy.backend.schema import UserCreate, User as UserSchema
-from backend_deploy.backend.db_depends import get_async_db
-from backend_deploy.backend.auth import hash_password, verify_password, create_access_token, get_current_user
+from backend.schema import UserCreate, User as UserSchema
+from backend.db_depends import get_async_db
+from backend.auth import hash_password, verify_password, create_access_token, get_current_user
 from sqlalchemy import func
-from backend_deploy.backend.models.fields import Field as FieldModel
+from backend.models.fields import Field as FieldModel
 from datetime import datetime, timedelta, timezone
-from backend_deploy.backend.auth import (
+from backend.auth import (
     hash_password, verify_password, create_access_token, get_current_user,
     generate_verification_code, send_verification_email,
 )
