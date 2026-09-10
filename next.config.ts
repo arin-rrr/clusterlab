@@ -1,11 +1,16 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  output: 'export',
+  output: 'standalone',
   typescript: { ignoreBuildErrors: true },
-  experimental: { typedRoutes: false },
-  images: {
-    unoptimized: true,
+  typedRoutes: false,
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://212.113.123.62:8000/:path*',
+      },
+    ];
   },
 };
 
