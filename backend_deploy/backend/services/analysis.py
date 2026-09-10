@@ -14,9 +14,9 @@ from sklearn.cluster import KMeans, BisectingKMeans, MiniBatchKMeans
 from sklearn.mixture import GaussianMixture
 from sklearn.metrics import silhouette_score
 
-from backend.models.fields import Field as FieldModel
-from backend.models.analysis_result import AnalysisResult as AnalysisResultModel
-from backend.models.field_recommendation import FieldRecommendation as FieldRecommendationModel
+from backend_deploy.backend.models.fields import Field as FieldModel
+from backend_deploy.backend.models.analysis_result import AnalysisResult as AnalysisResultModel
+from backend_deploy.backend.models.field_recommendation import FieldRecommendation as FieldRecommendationModel
 import folium
 from shapely.geometry import shape, mapping
 from shapely.ops import unary_union

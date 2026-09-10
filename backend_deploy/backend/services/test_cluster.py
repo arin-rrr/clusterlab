@@ -1,6 +1,6 @@
 import asyncio
-from backend.services.analysis import run_clustering_logic
-from backend.database import async_session_maker
+from backend_deploy.backend.services.analysis import run_clustering_logic
+from backend_deploy.backend.database import async_session_maker
 
 FIELD_ID = 1  # подставь реальный id существующего поля из твоей БД
 

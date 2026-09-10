@@ -6,12 +6,12 @@ from alembic import context
 
 # Импортируем твой Base и модели
 # Если папка называется backend, используем такой путь:
-from backend.database import Base
-from backend.models.users import User
-from backend.models.fields import Field
-from backend.models.analysis_result import AnalysisResult
-from backend.models.field_recommendation import FieldRecommendation
-from backend.models.payment import Payment
+from backend_deploy.backend.database import Base
+from backend_deploy.backend.models.users import User
+from backend_deploy.backend.models.fields import Field
+from backend_deploy.backend.models.analysis_result import AnalysisResult
+from backend_deploy.backend.models.field_recommendation import FieldRecommendation
+from backend_deploy.backend.models.payment import Payment
 
 # Если есть модель Field, добавь её тоже:
 # from backend.models.fields import Field

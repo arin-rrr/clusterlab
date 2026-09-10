@@ -1,6 +1,6 @@
 from sqlalchemy import Integer, Numeric, String, CheckConstraint, ForeignKey, DateTime, func, JSON
 from sqlalchemy.orm import mapped_column, Mapped, relationship
-from backend.database import Base
+from backend_deploy.backend.database import Base
 from datetime import datetime
 
 

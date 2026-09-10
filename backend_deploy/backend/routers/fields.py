@@ -6,21 +6,21 @@ from datetime import datetime
 from decimal import Decimal
 from datetime import timezone
 
-from backend.models.fields import Field as FieldModel
-from backend.schema import FieldCreate, Field as FieldSchema
-from backend.db_depends import get_async_db
-from backend.auth import get_current_user
-from backend.services.analysis import run_clustering_logic
-from backend.database import async_session_maker
-from backend.models.analysis_result import AnalysisResult as AnalysisResultModel
+from backend_deploy.backend.models.fields import Field as FieldModel
+from backend_deploy.backend.schema import FieldCreate, Field as FieldSchema
+from backend_deploy.backend.db_depends import get_async_db
+from backend_deploy.backend.auth import get_current_user
+from backend_deploy.backend.services.analysis import run_clustering_logic
+from backend_deploy.backend.database import async_session_maker
+from backend_deploy.backend.models.analysis_result import AnalysisResult as AnalysisResultModel
 from fastapi.responses import HTMLResponse
-from backend.services.analysis import (
+from backend_deploy.backend.services.analysis import (
     run_clustering_logic,
     build_cluster_map_html,
     build_cluster_polygons,
     build_prescription_shapefile,
 )
-from backend.models.field_recommendation import FieldRecommendation as FieldRecommendationModel
+from backend_deploy.backend.models.field_recommendation import FieldRecommendation as FieldRecommendationModel
 from sqlalchemy import func
 from fastapi.responses import StreamingResponse
 import io as io_module
