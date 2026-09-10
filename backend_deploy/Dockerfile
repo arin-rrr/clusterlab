@@ -19,7 +19,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Копируем папку backend целиком, сохраняя структуру
 
 # Пример правильных путей (относительно корня)
-COPY .backend_deploy/backend/ ./backend/
+COPY backend/ ./backend/
 # или
 
 # остальные инструкции...
