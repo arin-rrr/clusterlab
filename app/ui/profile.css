@@ -105,3 +105,60 @@
 .Field-Card--clickable:hover {
   transform: translateY(-2px);
 }
+
+/* ===== Skeleton Loader ===== */
+.profile-skeleton {
+  padding: 32px 0;
+  max-width: 640px;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #e8ebe4 25%,
+    #dce0d8 50%,
+    #e8ebe4 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.4s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+.skeleton.title {
+  height: 36px;
+  width: 70%;
+  margin-bottom: 20px;
+}
+
+.skeleton.line {
+  height: 18px;
+  margin-bottom: 14px;
+}
+
+.skeleton.line.w-50 { width: 50%; }
+.skeleton.line.w-40 { width: 40%; }
+.skeleton.line.w-30 { width: 30%; }
+.skeleton.line.w-60 { width: 60%; }
+
+.skeleton-usage {
+  margin-top: 48px;
+  padding: 24px;
+  background: #f4f6f1;
+  border-radius: 16px;
+}
+
+.skeleton.progress {
+  height: 28px;
+  width: 100%;
+  margin: 16px 0;
+  border-radius: 14px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

@@ -55,7 +55,25 @@ export default function ProfilePage() {
     fetchUserData();
   }, [router]);
 
-  if (loading) return <p>Загрузка профиля...</p>;
+  if (loading) {
+  return (
+    <main className="profile-container">
+      <div className="profile-skeleton">
+        {/* Заголовок */}
+        <div className="skeleton title"></div>
+        <div className="skeleton line w-50"></div>
+        <div className="skeleton line w-40"></div>
+
+        {/* Блок использования площади */}
+        <div className="skeleton-usage">
+          <div className="skeleton line w-30"></div>
+          <div className="skeleton progress"></div>
+          <div className="skeleton line w-60"></div>
+        </div>
+      </div>
+    </main>
+  );
+  }
   if (!userData) return null;
 
   const usagePercentage =
