@@ -2,6 +2,7 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
+# System deps for GDAL/GEOS/PROJ (geospatial libs)
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         libexpat1 \
@@ -9,19 +10,19 @@ RUN apt-get update && \
         libproj-dev \
         libgeos-dev \
         gdal-bin \
-    && ldconfig \
     && rm -rf /var/lib/apt/lists/*
 
+# Install Python deps first (better layer caching)
 COPY requirements.txt .
-
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Копируем папку backend целиком, сохраняя структуру
-
-# Пример правильных путей (относительно корня)
+# Copy app source
 COPY backend/ ./backend/
-# или
 
-# остальные инструкции...
+# Run as non-root
+RUN useradd --system --uid 1001 appuser
+USER appuser
 
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8080"]
+EXPOSE 8000
+
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
