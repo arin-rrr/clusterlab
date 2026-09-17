@@ -8,7 +8,7 @@ app = FastAPI(
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["http://localhost:3000",
-                   "https://clusterlab.vercel.app",
+                   "https://clusterlab-ers.ru",
                    "https://clusterlab.site",
                    ],
     allow_credentials=True,
