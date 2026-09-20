@@ -42,21 +42,22 @@ def create_payment(user_id: int, user_email: str, tariff: str):
                 "description": f"Подписка «{tariff}» ClusterLab",
                 "receipt": {
                     "customer": {
-                        "email": user_email,
+                        "email": user_email
                     },
+                    "tax_system_code": 2,  # 2 = УСН «доходы» (самый частый вариант)
                     "items": [
                         {
-                            "description": f"Подписка «{tariff}» ClusterLab",
-                            "quantity": "1.00",          # ← было "1"
-                            "amount": {
-                                "value": amount,
-                                "currency": "RUB",
-                            },
-                            "vat_code": VAT_CODE,
-                            "payment_subject": "service",
-                            "payment_mode": "full_payment",
-                        }
-                    ],
+                        "description": f"Подписка «{tariff}» — ClusterLab",
+                        "quantity": "1.00",          # ← обязательно 1.00
+                        "amount": {
+                            "value": amount,
+                            "currency": "RUB"
+                        },
+                        "vat_code": 1,               # без НДС
+                        "payment_subject": "service",
+                        "payment_mode": "full_payment"
+                    }
+                    ]
                 },
                 "metadata": {
                     "user_id": str(user_id),
