@@ -52,7 +52,39 @@ export default function FieldsPage() {
     return () => clearInterval(interval);
   }, [fields, fetchFields]);
 
-  if (loading) return <p>Загрузка полей...</p>;
+  if (loading) {
+      return (
+        <main className="Fields-Background">
+          <h2 className="Fields-Header">Мои поля</h2>
+
+          <div className="Fields-Cards-Container">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="Field-Card Field-Card--skeleton">
+                <div className="Field-Card-Top">
+                  <div className="skeleton skeleton-title"></div>
+                  <div className="skeleton skeleton-date"></div>
+                </div>
+
+                <div className="Field-Card-Info">
+                  <div className="Info-Item">
+                    <div className="skeleton skeleton-icon"></div>
+                    <div className="skeleton skeleton-text"></div>
+                  </div>
+                  <div className="Info-Item">
+                    <div className="skeleton skeleton-icon"></div>
+                    <div className="skeleton skeleton-text"></div>
+                  </div>
+                  <div className="Info-Item">
+                    <div className="skeleton skeleton-dot"></div>
+                    <div className="skeleton skeleton-text short"></div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </main>
+      );
+  };
 
   return (
     <main className="Fields-Background">

@@ -8,6 +8,7 @@
   padding: 40px;
 }
 
+
 .Fields-Cards-Container {
   display: flex;
   flex-direction: column;
@@ -80,4 +81,64 @@
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+/* ===== Skeleton для карточек полей ===== */
+.Field-Card--skeleton {
+  pointer-events: none;
+  cursor: default;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #eef0eb 25%,
+    #d4dacb 50%,
+    #eef0eb 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+.skeleton-title {
+  height: 20px;
+  width: 90px;
+}
+
+.skeleton-date {
+  height: 16px;
+  width: 80px;
+}
+
+.skeleton-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.skeleton-text {
+  height: 16px;
+  width: 70px;
+}
+
+.skeleton-text.short {
+  width: 55px;
+}
+
+.skeleton-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
 }
