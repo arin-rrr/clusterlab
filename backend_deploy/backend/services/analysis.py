@@ -76,8 +76,6 @@ def download_field_data(lat, lon, radius):
 
     bbox = [lon - delta, lat - delta, lon + delta, lat + delta]
 
-    print(f"--- [Element84] Запрос снимка: lat={lat}, lon={lon}, radius={safe_radius}m ---")
-
     catalog = Client.open("https://earth-search.aws.element84.com/v1")
 
     search = catalog.search(
@@ -106,7 +104,6 @@ def download_field_data(lat, lon, radius):
     element84_bands = [band_mapping[b] for b in band_names]
 
     for item in items_sorted:
-        print(f"Пробуем снимок {item.datetime.date()}, облачность: {item.properties.get('eo:cloud_cover', 100):.2f}%")
 
         try:
             arrays = []

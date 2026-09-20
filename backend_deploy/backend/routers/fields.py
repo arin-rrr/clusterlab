@@ -85,7 +85,6 @@ async def create_field(
         status="В обработке"
     )
 
-    # Больше НЕ трогаем current_user.current_area — считаем всегда динамически
     db.add(new_field)
 
     try:
