@@ -135,16 +135,83 @@ export default function FieldResultPage() {
     window.URL.revokeObjectURL(url);
   };
 
-  if (error) return <p className="error-message">{error}</p>;
-  if (!data) return <p className="Field-Result-Loading">Загрузка...</p>;
-  if (data.status !== "Готово") {
-    return <p className="Field-Result-Loading">Анализ ещё не завершён. Текущий статус: {data.status}</p>;
+  // ===== Полная загрузка =====
+  if (!data && !error) {
+    return (
+      <main className="Field-Result-Page">
+        <div className="Field-Result-Split">
+          <div className="Field-Result-Left">
+            <div className="skeleton skeleton-title-lg"></div>
+
+            <div className="Field-Result-Stats">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="Stat-Item">
+                  <div className="skeleton skeleton-label"></div>
+                  <div className="skeleton skeleton-value"></div>
+                </div>
+              ))}
+            </div>
+
+            <div className="Cluster-Legend">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="Cluster-Legend-Item">
+                  <div className="skeleton skeleton-swatch"></div>
+                  <div className="skeleton skeleton-legend-text"></div>
+                </div>
+              ))}
+            </div>
+
+            <div className="Field-Result-Recommendations">
+              <div className="skeleton skeleton-subtitle"></div>
+              <div className="skeleton skeleton-rec-block"></div>
+              <div className="skeleton skeleton-rec-block"></div>
+            </div>
+          </div>
+
+          <div className="Field-Result-Right">
+            <div className="skeleton skeleton-subtitle"></div>
+            <div className="Cluster-Map-Container skeleton-map">
+              <div className="skeleton skeleton-map-inner"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+    );
   }
 
+  // ===== Ошибка =====
+  if (error) {
+    return (
+      <main className="Field-Result-Page">
+        <div className="Field-Result-Status-Box error">
+          <p>{error}</p>
+        </div>
+      </main>
+    );
+  }
+
+  // ===== Анализ ещё не готов =====
+  if (data!.status !== "Готово") {
+    return (
+      <main className="Field-Result-Page">
+        <div className="Field-Result-Status-Box processing">
+          <div className="spinner"></div>
+          <h3>Анализ ещё выполняется</h3>
+          <p>
+            Текущий статус: <strong>{data!.status}</strong>
+          </p>
+          <p className="hint">
+            Страница обновится автоматически, когда всё будет готово
+          </p>
+        </div>
+      </main>
+    );
+  }
+
+  // ===== Готовый результат =====
   return (
     <main className="Field-Result-Page">
       <div className="Field-Result-Split">
-
         <div className="Field-Result-Left">
           <h2 className="Field-Result-Title">Поле №{id}</h2>
 
@@ -174,13 +241,16 @@ export default function FieldResultPage() {
                 <div key={i} className="Cluster-Legend-Item">
                   <span
                     className="Cluster-Legend-Swatch"
-                    style={{ backgroundColor: CLUSTER_COLORS[i % CLUSTER_COLORS.length] }}
+                    style={{
+                      backgroundColor: CLUSTER_COLORS[i % CLUSTER_COLORS.length],
+                    }}
                   />
                   <span>
                     Кластер {i + 1}
                     {stat && (
                       <span className="Cluster-Legend-Details">
-                        {" "}— {stat.share_percent}% площади, NDVI {stat.mean_ndvi}
+                        {" "}
+                        — {stat.share_percent}% площади, NDVI {stat.mean_ndvi}
                       </span>
                     )}
                   </span>
@@ -198,10 +268,14 @@ export default function FieldResultPage() {
                     <div className="Recommendation-Zone-Header">
                       <span
                         className="Cluster-Legend-Swatch"
-                        style={{ backgroundColor: CLUSTER_COLORS[zone.cluster % CLUSTER_COLORS.length] }}
+                        style={{
+                          backgroundColor:
+                            CLUSTER_COLORS[zone.cluster % CLUSTER_COLORS.length],
+                        }}
                       />
                       <strong>
-                        Кластер {zone.cluster + 1}: {zone.fertilizer}, {zone.dose_kg_ha} кг/га
+                        Кластер {zone.cluster + 1}: {zone.fertilizer},{" "}
+                        {zone.dose_kg_ha} кг/га
                       </strong>
                     </div>
                     <p className="Recommendation-Zone-Text">{zone.reasoning}</p>
@@ -230,21 +304,30 @@ export default function FieldResultPage() {
             {mapHtml ? (
               <iframe
                 srcDoc={mapHtml}
-                style={{ width: "100%", height: "100%", border: "none", borderRadius: "12px" }}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  border: "none",
+                  borderRadius: "12px",
+                }}
               />
             ) : (
-              <p>Загрузка карты...</p>
+              <div className="map-loading">
+                <div className="spinner"></div>
+                <span>Загрузка карты...</span>
+              </div>
             )}
           </div>
+
           <div className="Download-Map-Wrapper">
-    <button
-      className="Download-Button"
-      onClick={handleDownloadMap}
-      disabled={!mapHtml}
-    >
-      Скачать карту
-    </button>
-  </div>
+            <button
+              className="Download-Button"
+              onClick={handleDownloadMap}
+              disabled={!mapHtml}
+            >
+              Скачать карту
+            </button>
+          </div>
         </div>
       </div>
     </main>
