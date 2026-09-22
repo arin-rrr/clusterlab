@@ -40,16 +40,18 @@ async def create_payment_endpoint(
 
 @router.post('/webhook')
 async def payment_webhook(request: Request, db: AsyncSession = Depends(get_async_db)):
-    """
-    ЮKassa уведомляет нас, когда платёж переходит в 'succeeded'.
-    """
     data = await request.json()
 
+    print("=== YOOKASSA WEBHOOK ===")
+    print(data)  # ← увидим, что именно пришло
+
     if data.get("event") != "payment.succeeded":
+        print("Event ignored:", data.get("event"))
         return {"status": "ignored"}
 
     payment_obj = data["object"]
     provider_payment_id = payment_obj["id"]
+    print("Payment ID:", provider_payment_id)
 
     result = await db.scalars(
         select(PaymentModel).where(PaymentModel.provider_payment_id == provider_payment_id)
@@ -57,17 +59,21 @@ async def payment_webhook(request: Request, db: AsyncSession = Depends(get_async
     payment_record = result.first()
 
     if not payment_record:
+        print("Payment not found in DB")
         return {"status": "unknown payment"}
 
     if payment_record.status == "succeeded":
-        return {"status": "already processed"}  # защита от повторной обработки webhook
+        print("Already processed")
+        return {"status": "already processed"}
 
     user_id = int(payment_obj["metadata"]["user_id"])
     tariff = payment_obj["metadata"]["tariff"]
+    print(f"Updating user {user_id} to tariff {tariff}")
 
     user = await db.get(UserModel, user_id)
     if not user:
-        return {"status": "unknown user"}  # если запись платежа есть, а пользователя — нет
+        print("User not found")
+        return {"status": "unknown user"}
 
     user.tariff = tariff
     user.max_area = TARIFF_PRICES[tariff]["max_area"]
@@ -76,4 +82,5 @@ async def payment_webhook(request: Request, db: AsyncSession = Depends(get_async
     payment_record.status = "succeeded"
 
     await db.commit()
+    print("SUCCESS: tariff updated")
     return {"status": "ok"}
