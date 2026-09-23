@@ -509,7 +509,7 @@ def build_prescription_shapefile(polygons_by_cluster: dict, zones: list[dict]) -
     writer = shapefile.Writer(shp=buf_shp, shx=buf_shx, dbf=buf_dbf, shapeType=shapefile.POLYGON)
     writer.field("cluster", "N")
     writer.field("fertilizer", "C", size=60)
-    writer.field("dose_kgha", "N", decimal=1)
+    writer.field("Rate", "N", decimal=1)
 
     for cluster_id, geom in polygons_by_cluster.items():
         zone = zones_by_cluster.get(cluster_id, {})
@@ -519,7 +519,7 @@ def build_prescription_shapefile(polygons_by_cluster: dict, zones: list[dict]) -
         writer.record(
             cluster=cluster_id,
             fertilizer=zone.get("fertilizer", ""),
-            dose_kgha=zone.get("dose_kg_ha", 0),
+            dose_kgha=zone.get("Rate", 0),
         )
 
     writer.close()
