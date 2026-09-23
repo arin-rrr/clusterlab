@@ -8,8 +8,8 @@ Configuration.account_id = os.getenv("YOOKASSA_SHOP_ID")
 Configuration.secret_key = os.getenv("YOOKASSA_SECRET_KEY")
 
 TARIFF_PRICES = {
-    "standard": {"amount": 1500.00, "max_area": 100},
-    "pro": {"amount": 4500.00, "max_area": 500},
+    "standard": {"amount": 1290.00, "max_area": 100},
+    "pro": {"amount": 2990.00, "max_area": 500},
 }
 
 # Подставьте свой код НДС (зависит от вашей системы налогообложения):

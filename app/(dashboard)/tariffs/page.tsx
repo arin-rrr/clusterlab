@@ -6,7 +6,7 @@ const TARIFFS = [
   {
     id: "standard",
     name: "Стандарт",
-    price: "1 500 ₽",
+    price: "1 290 ₽",
     period: "/ 30 дней",
     area: "до 100 га",
     features: [
@@ -19,7 +19,7 @@ const TARIFFS = [
   {
     id: "pro",
     name: "Про",
-    price: "4 500 ₽",
+    price: "2 990 ₽",
     period: "/ 30 дней",
     area: "до 500 га",
     features: [

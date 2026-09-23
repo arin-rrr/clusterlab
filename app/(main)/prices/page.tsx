@@ -59,7 +59,7 @@ export default function PricesPage() {
             </div>
             <div className="Prices-Page-Block-1-Bottom">
               <div className="Prices-Page-Block-1-Price">
-                <p>1500 руб / месяц</p>
+                <p>1290 ₽ / 30 дней</p>
               </div>
               <Link href="/">
                 <p className="Prices-Page-Block-1-Button">Начать Работу</p>
@@ -100,7 +100,7 @@ export default function PricesPage() {
             </div>
             <div className="Prices-Page-Block-1-Bottom">
               <div className="Prices-Page-Block-1-Price">
-                <p>4500  руб / месяц</p>
+                <p>2990 ₽ / 30 дней</p>
               </div>
               <Link href="/">
                 <p className="Prices-Page-Block-1-Button">Начать Работу</p>
@@ -123,7 +123,7 @@ export default function PricesPage() {
               <p>Что входит:</p>
               <ul>
                 <li>
-                  <p>Анализ 1 поля площадью до 10 га</p>
+                  <p>Анализ полей площадью до 10 га</p>
                 </li>
                 <li>
                   <p>Демонстрационная кластеризация по NDVI</p>
@@ -137,7 +137,7 @@ export default function PricesPage() {
             </div>
             <div className="Prices-Page-Block-1-Bottom">
               <div className="Prices-Page-Block-2-Price">
-                <p>0 рублей</p>
+                <p>0 ₽ / 7 дней</p>
               </div>
               <Link href="/">
                 <p className="Prices-Page-Block-2-Button">Начать Работу</p>
@@ -174,7 +174,7 @@ export default function PricesPage() {
     {
       name: "Стандарт",
       description: "Идеальный старт для небольших фермерских хозяйств",
-      price: "1500 руб / месяц",
+      price: "1290 ₽ / 30 дней",
       features: [
         "Интерактивная карта и экспорт рекомендаций",
         "Площадь угодий до 100 га в месяц",
@@ -184,7 +184,7 @@ export default function PricesPage() {
     {
       name: "Про",
       description: "Инструмент для масштабного роста и максимальной точности",
-      price: "4500 руб / месяц",
+      price: "2990 ₽ / 30 дней",
       features: [
         "Всё, что есть в Стандарт",
         "Площадь угодий до 500 га в месяц",
@@ -194,7 +194,7 @@ export default function PricesPage() {
     {
       name: "Демо",
       description: "Попробуйте возможности на небольшом поле",
-      price: "0 рублей / 7 дней",
+      price: "0 ₽ / 7 дней",
       features: [
         "Анализ полей суммарной площадью до 10 га",
         "Демонстрационная кластеризация по NDVI",
