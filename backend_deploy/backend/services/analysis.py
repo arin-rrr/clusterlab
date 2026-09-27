@@ -192,6 +192,7 @@ def best_cluster_algo(data_scaled: np.ndarray):
         return 'KMeans', 3, 0.0
 
     best_row = df.loc[df['silhouette_score'].idxmax()]
+    print(best_row)
     return best_row['method'], int(best_row['n_clusters']), round(float(best_row['silhouette_score']), 2)
 
 
